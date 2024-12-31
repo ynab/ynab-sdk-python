@@ -2,17 +2,18 @@
 
 ## Setup
 
-- Install dependencies: `pip install -r requirements.txt && pip install -r test-requirements.txt`
+- Install Poetry: `pip install poetry`
+- Install dependencies: `poetry install`
 - Install [OpenAPI Generator](https://openapi-generator.tech/) (on macOS: `brew install openapi-generator`)
-- Run tests: `pytest --cov=ynab`
+- Run tests: `poetry run pytest`
 
 ## Generating
 
-1. Change `PACKAGE_VERSION` in `scripts/generate.sh`.
+1. Change `packageVersion` in `openapi-generator-config.yaml`
 1. Run `scripts/generate.sh`.
 
 ## Publishing
 
-1. Run `pip install setuptools wheel twine`.
-1. Generate package: `python setup.py sdist bdist_wheel`.
-1. Upload package: `twine upload dist/*`.
+1. Generate package: `poetry build`.
+1. Run `poetry config pypi-token.pypi YOUR_PYPI_API_TOKEN`
+1. Upload package: `poetry publish --build`.

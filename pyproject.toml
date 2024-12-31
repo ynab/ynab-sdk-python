@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "ynab"
-version = "1.0.0"
+version = "1.0.1"
 description = "Official Python client for the YNAB API. API documentation available at https://api.ynab.com. Generated from server specification version 1.72.1"
 authors = ["YNAB"]
-license = "{name=Apache-2.0, url=https://www.apache.org/licenses/LICENSE-2.0.html}"
+license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/ynab/ynab-sdk-python"
-keywords = ["OpenAPI", "OpenAPI-Generator", "YNAB API Endpoints"]
+keywords = ["YNAB API Endpoints", "finance", "ynab", "budgeting", "api"]
 include = ["ynab/py.typed"]
 
 [tool.poetry.dependencies]

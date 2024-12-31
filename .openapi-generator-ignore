@@ -27,3 +27,5 @@
 .travis.yml
 git_push.sh
 README.md
+setup.py
+setup.cfg
