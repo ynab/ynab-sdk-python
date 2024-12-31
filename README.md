@@ -1,6 +1,6 @@
 # YNAB API Python Library
 
-[![Build](https://github.com/ynab/ynab-sdk-python/actions/workflows/build-test.yml/badge.svg)](https://github.com/ynab/ynab-sdk-ruby/actions/workflows/build-test.yml)
+[![Build](https://github.com/ynab/ynab-sdk-python/actions/workflows/build-test.yml/badge.svg)](https://github.com/ynab/ynab-sdk-python/actions/workflows/build-test.yml)
 
 This is the Python client for the YNAB API.
 
