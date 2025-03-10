@@ -63,6 +63,7 @@ docs/PayeesResponseData.md
 docs/PostAccountWrapper.md
 docs/PostScheduledTransactionWrapper.md
 docs/PostTransactionsWrapper.md
+docs/PutScheduledTransactionWrapper.md
 docs/PutTransactionWrapper.md
 docs/SaveAccount.md
 docs/SaveCategory.md
@@ -105,9 +106,9 @@ docs/UserResponse.md
 docs/UserResponseData.md
 pyproject.toml
 requirements.txt
-setup.cfg
 test-requirements.txt
 test/__init__.py
+test/test_put_scheduled_transaction_wrapper.py
 tox.ini
 ynab/__init__.py
 ynab/api/__init__.py
@@ -183,6 +184,7 @@ ynab/models/payees_response_data.py
 ynab/models/post_account_wrapper.py
 ynab/models/post_scheduled_transaction_wrapper.py
 ynab/models/post_transactions_wrapper.py
+ynab/models/put_scheduled_transaction_wrapper.py
 ynab/models/put_transaction_wrapper.py
 ynab/models/save_account.py
 ynab/models/save_category.py

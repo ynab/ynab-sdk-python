@@ -76,6 +76,8 @@ Class | Method | Description
 **ScheduledTransactionsApi** | [**create_scheduled_transaction**](docs/ScheduledTransactionsApi.md#create_scheduled_transaction) | Create a single scheduled transaction
 &nbsp; | [**get_scheduled_transaction_by_id**](docs/ScheduledTransactionsApi.md#get_scheduled_transaction_by_id) | Single scheduled transaction
 &nbsp; | [**get_scheduled_transactions**](docs/ScheduledTransactionsApi.md#get_scheduled_transactions) | List scheduled transactions
+&nbsp; | [**update_scheduled_transaction**](docs/ScheduledTransactionsApi.md#update_scheduled_transaction) | Update an existing scheduled transactions
+&nbsp; | [**delete_scheduled_transaction**](docs/ScheduledTransactionsApi.md#delete_scheduled_transaction) | Delete an existing scheduled transaction
 **TransactionsApi** | [**create_transaction**](docs/TransactionsApi.md#create_transaction) | Create a single transaction or multiple transactions
 &nbsp; | [**delete_transaction**](docs/TransactionsApi.md#delete_transaction) | Deletes an existing transaction
 &nbsp; | [**get_transaction_by_id**](docs/TransactionsApi.md#get_transaction_by_id) | Single transaction
