@@ -19,16 +19,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
-from ynab.models.accounts_response_data import AccountsResponseData
+from ynab.models.save_scheduled_transaction import SaveScheduledTransaction
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AccountsResponse(BaseModel):
+class PutScheduledTransactionWrapper(BaseModel):
     """
-    AccountsResponse
+    PutScheduledTransactionWrapper
     """ # noqa: E501
-    data: AccountsResponseData
-    __properties: ClassVar[List[str]] = ["data"]
+    scheduled_transaction: SaveScheduledTransaction
+    __properties: ClassVar[List[str]] = ["scheduled_transaction"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +48,7 @@ class AccountsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AccountsResponse from a JSON string"""
+        """Create an instance of PutScheduledTransactionWrapper from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,14 +69,14 @@ class AccountsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of scheduled_transaction
+        if self.scheduled_transaction:
+            _dict['scheduled_transaction'] = self.scheduled_transaction.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AccountsResponse from a dict"""
+        """Create an instance of PutScheduledTransactionWrapper from a dict"""
         if obj is None:
             return None
 
@@ -84,7 +84,7 @@ class AccountsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "data": AccountsResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None
+            "scheduled_transaction": SaveScheduledTransaction.from_dict(obj["scheduled_transaction"]) if obj.get("scheduled_transaction") is not None else None
         })
         return _obj
 
