@@ -597,7 +597,7 @@ class ScheduledTransactionsApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/budgets/{budget_id}/scheduled_transactions',
+            resource_path='/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1464,7 +1464,7 @@ class ScheduledTransactionsApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/budgets/{budget_id}/scheduled_transactions',
+            resource_path='/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
