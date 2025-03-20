@@ -108,7 +108,6 @@ pyproject.toml
 requirements.txt
 test-requirements.txt
 test/__init__.py
-test/test_put_scheduled_transaction_wrapper.py
 tox.ini
 ynab/__init__.py
 ynab/api/__init__.py
