@@ -105,8 +105,6 @@ docs/UserApi.md
 docs/UserResponse.md
 docs/UserResponseData.md
 pyproject.toml
-requirements.txt
-test-requirements.txt
 test/__init__.py
 tox.ini
 ynab/__init__.py
