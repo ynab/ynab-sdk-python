@@ -29,5 +29,3 @@ git_push.sh
 README.md
 setup.py
 setup.cfg
-requirements.txt
-test-requirements.txt
