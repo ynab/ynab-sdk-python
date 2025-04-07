@@ -40,7 +40,8 @@ jobs:
         run: poetry build
       - name: Commit and push changes
         run: |
-          git add ynab/configuration.py ynab/api_client.py ynab/__init__.py pyproject.toml openapi-generator-config.yaml && git diff-index --quiet HEAD || git commit -m 'Bumping version for ${{ steps.bump_version.outputs.new_version }}'
+          git add ynab/configuration.py ynab/api_client.py ynab/__init__.py pyproject.toml openapi-generator-config.yaml
+          git commit -m 'Bumping version for ${{ steps.bump_version.outputs.new_version }}'
           git push gh-origin HEAD:main
       - name: Publish to PyPI
         env:
