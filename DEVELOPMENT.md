@@ -14,6 +14,4 @@
 
 ## Publishing
 
-1. Generate package: `poetry build`.
-1. Run `poetry config pypi-token.pypi YOUR_PYPI_API_TOKEN`
-1. Upload package: `poetry publish --build`.
+Run the "Publish" GitHub Actions workflow.
