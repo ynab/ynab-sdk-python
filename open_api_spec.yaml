@@ -3385,6 +3385,7 @@ components:
         - green
         - blue
         - purple
+        - ""
         - null
       nullable: true
     TransactionFlagName:
