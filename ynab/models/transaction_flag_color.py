@@ -32,6 +32,7 @@ class TransactionFlagColor(str, Enum):
     GREEN = 'green'
     BLUE = 'blue'
     PURPLE = 'purple'
+    EMPTY = ''
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
