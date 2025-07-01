@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transaction** | [**TransactionDetail**](TransactionDetail.md) |  | 
+**server_knowledge** | **int** | The knowledge of the server | 
 
 ## Example
 
