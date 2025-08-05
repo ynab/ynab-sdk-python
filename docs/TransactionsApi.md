@@ -526,7 +526,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_month**
-> HybridTransactionsResponse get_transactions_by_month(budget_id, month, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> TransactionsResponse get_transactions_by_month(budget_id, month, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
 List transactions in month, excluding any pending transactions
 
@@ -538,7 +538,7 @@ Returns all transactions for a specified month
 
 ```python
 import ynab
-from ynab.models.hybrid_transactions_response import HybridTransactionsResponse
+from ynab.models.transactions_response import TransactionsResponse
 from ynab.rest import ApiException
 from pprint import pprint
 
@@ -592,7 +592,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HybridTransactionsResponse**](HybridTransactionsResponse.md)
+[**TransactionsResponse**](TransactionsResponse.md)
 
 ### Authorization
 

@@ -1482,7 +1482,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HybridTransactionsResponse"
+                $ref: "#/components/schemas/TransactionsResponse"
         "404":
           description: No transactions were found
           content:
