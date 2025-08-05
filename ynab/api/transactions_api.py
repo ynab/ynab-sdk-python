@@ -1925,7 +1925,7 @@ class TransactionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HybridTransactionsResponse:
+    ) -> TransactionsResponse:
         """List transactions in month, excluding any pending transactions
 
         Returns all transactions for a specified month
@@ -1975,7 +1975,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "HybridTransactionsResponse",
+            '200': "TransactionsResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -2009,7 +2009,7 @@ class TransactionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[HybridTransactionsResponse]:
+    ) -> ApiResponse[TransactionsResponse]:
         """List transactions in month, excluding any pending transactions
 
         Returns all transactions for a specified month
@@ -2059,7 +2059,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "HybridTransactionsResponse",
+            '200': "TransactionsResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -2143,7 +2143,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "HybridTransactionsResponse",
+            '200': "TransactionsResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
