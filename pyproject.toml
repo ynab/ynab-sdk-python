@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ynab"
-version = "1.6.0"
-description = "Official Python client for the YNAB API. API documentation available at https://api.ynab.com. Generated from server specification version 1.75.0"
+version = "1.7.0"
+description = "Official Python client for the YNAB API. API documentation available at https://api.ynab.com. Generated from server specification version 1.76.0"
 authors = ["YNAB"]
 license = "Apache-2.0"
 readme = "README.md"
