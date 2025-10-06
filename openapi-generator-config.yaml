@@ -1,5 +1,5 @@
 packageName: ynab
-packageVersion: 1.8.0
+packageVersion: 1.9.0
 packageDescription: Official Python client for the YNAB API. API documentation available at https://api.ynab.com.
 licenseInfo:
   name: Apache-2.0
