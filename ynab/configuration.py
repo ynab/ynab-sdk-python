@@ -22,6 +22,7 @@ from typing import Any, ClassVar, Dict, List, Literal, Optional, TypedDict, Unio
 from typing_extensions import NotRequired, Self
 
 import urllib3
+import certifi
 
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
@@ -256,7 +257,7 @@ class Configuration:
            Set this to false to skip verifying SSL certificate when calling API
            from https server.
         """
-        self.ssl_ca_cert = ssl_ca_cert
+        self.ssl_ca_cert = ssl_ca_cert if ssl_ca_cert is not None else certifi.where()
 
         """Set this to verify the peer using PEM (str) or DER (bytes)
            certificate data.
