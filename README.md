@@ -41,54 +41,61 @@ configuration = ynab.Configuration(
 )
 
 with ynab.ApiClient(configuration) as api_client:
-    budgets_api = ynab.BudgetsApi(api_client)
-    budgets_response = budgets_api.get_budgets()
-    budgets = budgets_response.data.budgets
+    plans_api = ynab.PlansApi(api_client)
+    plans_response = plans_api.get_plans()
+    plans = plans_response.data.budgets
     
-    for budget in budgets:
-        print(budget.name) 
+    for plan in plans:
+        print(plan.name) 
 ```
 
 ## Methods
 
 Class | Method | Description
 ------------ | ------------- | -------------
-**UserApi** | [**get_user**](docs/UserApi.md#get_user) | User info
-**AccountsApi** | [**create_account**](docs/AccountsApi.md#create_account) | Create a new account
-&nbsp; | [**get_account_by_id**](docs/AccountsApi.md#get_account_by_id) | Single account
-&nbsp; | [**get_accounts**](docs/AccountsApi.md#get_accounts) | Account list
-**BudgetsApi** | [**get_budget_by_id**](docs/BudgetsApi.md#get_budget_by_id) | Single budget
-&nbsp; | [**get_budget_settings_by_id**](docs/BudgetsApi.md#get_budget_settings_by_id) | Budget Settings
-&nbsp; | [**get_budgets**](docs/BudgetsApi.md#get_budgets) | List budgets
-**CategoriesApi** | [**get_categories**](docs/CategoriesApi.md#get_categories) | List categories
-&nbsp; | [**get_category_by_id**](docs/CategoriesApi.md#get_category_by_id) | Single category
-&nbsp; | [**get_month_category_by_id**](docs/CategoriesApi.md#get_month_category_by_id) | Single category for a specific budget month
+**UserApi** | [**get_user**](docs/UserApi.md#get_user) | Get user
+**AccountsApi** | [**create_account**](docs/AccountsApi.md#create_account) | Create an account
+&nbsp; | [**get_account_by_id**](docs/AccountsApi.md#get_account_by_id) | Get an account
+&nbsp; | [**get_accounts**](docs/AccountsApi.md#get_accounts) | Get all accounts
+**BudgetsApi** | [**get_plan_by_id**](docs/BudgetsApi.md#get_plan_by_id) | Get a plan
+&nbsp; | [**get_plan_settings_by_id**](docs/BudgetsApi.md#get_plan_settings_by_id) | Get plan settings
+&nbsp; | [**get_plans**](docs/BudgetsApi.md#get_plans) | Get all plans
+**CategoriesApi** | [**create_category**](docs/CategoriesApi.md#create_category) | Create a category
+&nbsp; | [**create_category_group**](docs/CategoriesApi.md#create_category_group) | Create a category group
+&nbsp; | [**get_categories**](docs/CategoriesApi.md#get_categories) | Get all categories
+&nbsp; | [**get_category_by_id**](docs/CategoriesApi.md#get_category_by_id) | Get a category
+&nbsp; | [**get_month_category_by_id**](docs/CategoriesApi.md#get_month_category_by_id) | Get a category for a specific plan month
 &nbsp; | [**update_category**](docs/CategoriesApi.md#update_category) | Update a category
+&nbsp; | [**update_category_group**](docs/CategoriesApi.md#update_category_group) | Update a category group
 &nbsp; | [**update_month_category**](docs/CategoriesApi.md#update_month_category) | Update a category for a specific month
-**MonthsApi** | [**get_budget_month**](docs/MonthsApi.md#get_budget_month) | Single budget month
-&nbsp; | [**get_budget_months**](docs/MonthsApi.md#get_budget_months) | List budget months
-**PayeeLocationsApi** | [**get_payee_location_by_id**](docs/PayeeLocationsApi.md#get_payee_location_by_id) | Single payee location
-&nbsp; | [**get_payee_locations**](docs/PayeeLocationsApi.md#get_payee_locations) | List payee locations
-&nbsp; | [**get_payee_locations_by_payee**](docs/PayeeLocationsApi.md#get_payee_locations_by_payee) | List locations for a payee
-**PayeesApi** | [**get_payee_by_id**](docs/PayeesApi.md#get_payee_by_id) | Single payee
-&nbsp; | [**get_payees**](docs/PayeesApi.md#get_payees) | List payees
+**MonthsApi** | [**get_plan_month**](docs/MonthsApi.md#get_plan_month) | Get a plan month
+&nbsp; | [**get_plan_months**](docs/MonthsApi.md#get_plan_months) | Get all plan months
+**PayeeLocationsApi** | [**get_payee_location_by_id**](docs/PayeeLocationsApi.md#get_payee_location_by_id) | Get a payee location
+&nbsp; | [**get_payee_locations**](docs/PayeeLocationsApi.md#get_payee_locations) | Get all payee locations
+&nbsp; | [**get_payee_locations_by_payee**](docs/PayeeLocationsApi.md#get_payee_locations_by_payee) | Get all locations for a payee
+**PayeesApi** | [**get_payee_by_id**](docs/PayeesApi.md#get_payee_by_id) | Get a payee
+&nbsp; | [**get_payees**](docs/PayeesApi.md#get_payees) | Get all payees
 &nbsp; | [**update_payee**](docs/PayeesApi.md#update_payee) | Update a payee
-**ScheduledTransactionsApi** | [**create_scheduled_transaction**](docs/ScheduledTransactionsApi.md#create_scheduled_transaction) | Create a single scheduled transaction
-&nbsp; | [**get_scheduled_transaction_by_id**](docs/ScheduledTransactionsApi.md#get_scheduled_transaction_by_id) | Single scheduled transaction
-&nbsp; | [**get_scheduled_transactions**](docs/ScheduledTransactionsApi.md#get_scheduled_transactions) | List scheduled transactions
-&nbsp; | [**update_scheduled_transaction**](docs/ScheduledTransactionsApi.md#update_scheduled_transaction) | Update an existing scheduled transactions
-&nbsp; | [**delete_scheduled_transaction**](docs/ScheduledTransactionsApi.md#delete_scheduled_transaction) | Delete an existing scheduled transaction
+**MoneyMovementsApi** | [**get_money_movement_groups**](docs/MoneyMovementsApi.md#get_money_movement_groups) | Get all money movement groups
+&nbsp; | [**get_money_movement_groups_by_month**](docs/MoneyMovementsApi.md#get_money_movement_groups_by_month) | Get money movement groups for a plan month
+&nbsp; | [**get_money_movements**](docs/MoneyMovementsApi.md#get_money_movements) | Get all money movements
+&nbsp; | [**get_money_movements_by_month**](docs/MoneyMovementsApi.md#get_money_movements_by_month) | Get money movements for a plan month
 **TransactionsApi** | [**create_transaction**](docs/TransactionsApi.md#create_transaction) | Create a single transaction or multiple transactions
-&nbsp; | [**delete_transaction**](docs/TransactionsApi.md#delete_transaction) | Deletes an existing transaction
-&nbsp; | [**get_transaction_by_id**](docs/TransactionsApi.md#get_transaction_by_id) | Single transaction
-&nbsp; | [**get_transactions**](docs/TransactionsApi.md#get_transactions) | List transactions
-&nbsp; | [**get_transactions_by_account**](docs/TransactionsApi.md#get_transactions_by_account) | List account transactions
-&nbsp; | [**get_transactions_by_category**](docs/TransactionsApi.md#get_transactions_by_category) | List category transactions, excluding any pending transactions
-&nbsp; | [**get_transactions_by_month**](docs/TransactionsApi.md#get_transactions_by_month) | List transactions in month, excluding any pending transactions
-&nbsp; | [**get_transactions_by_payee**](docs/TransactionsApi.md#get_transactions_by_payee) | List payee transactions, excluding any pending transactions
+&nbsp; | [**delete_transaction**](docs/TransactionsApi.md#delete_transaction) | Delete a transaction
+&nbsp; | [**get_transaction_by_id**](docs/TransactionsApi.md#get_transaction_by_id) | Get a transaction
+&nbsp; | [**get_transactions**](docs/TransactionsApi.md#get_transactions) | Get all transactions
+&nbsp; | [**get_transactions_by_account**](docs/TransactionsApi.md#get_transactions_by_account) | Get all account transactions
+&nbsp; | [**get_transactions_by_category**](docs/TransactionsApi.md#get_transactions_by_category) | Get all category transactions
+&nbsp; | [**get_transactions_by_month**](docs/TransactionsApi.md#get_transactions_by_month) | Get all plan month transactions
+&nbsp; | [**get_transactions_by_payee**](docs/TransactionsApi.md#get_transactions_by_payee) | Get all payee transactions
 &nbsp; | [**import_transactions**](docs/TransactionsApi.md#import_transactions) | Import transactions
-&nbsp; | [**update_transaction**](docs/TransactionsApi.md#update_transaction) | Updates an existing transaction
+&nbsp; | [**update_transaction**](docs/TransactionsApi.md#update_transaction) | Update a transaction
 &nbsp; | [**update_transactions**](docs/TransactionsApi.md#update_transactions) | Update multiple transactions
+**ScheduledTransactionsApi** | [**create_scheduled_transaction**](docs/ScheduledTransactionsApi.md#create_scheduled_transaction) | Create a scheduled transaction
+&nbsp; | [**delete_scheduled_transaction**](docs/ScheduledTransactionsApi.md#delete_scheduled_transaction) | Delete a scheduled transaction
+&nbsp; | [**get_scheduled_transaction_by_id**](docs/ScheduledTransactionsApi.md#get_scheduled_transaction_by_id) | Get a scheduled transaction
+&nbsp; | [**get_scheduled_transactions**](docs/ScheduledTransactionsApi.md#get_scheduled_transactions) | Get all scheduled transactions
+&nbsp; | [**update_scheduled_transaction**](docs/ScheduledTransactionsApi.md#update_scheduled_transaction) | Update a scheduled transaction
 
 ## Versioning
 
@@ -96,6 +103,6 @@ The version of this client is defined in the `pyproject.toml` file and follows [
 
 ## License
 
-Copyright (c) 2025 You Need A Budget, LLC
+Copyright (c) 2025 YNAB
 
 Licensed under the Apache-2.0 license

@@ -4,15 +4,15 @@ All URIs are relative to *https://api.ynab.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_account**](AccountsApi.md#create_account) | **POST** /budgets/{budget_id}/accounts | Create a new account
-[**get_account_by_id**](AccountsApi.md#get_account_by_id) | **GET** /budgets/{budget_id}/accounts/{account_id} | Single account
-[**get_accounts**](AccountsApi.md#get_accounts) | **GET** /budgets/{budget_id}/accounts | Account list
+[**create_account**](AccountsApi.md#create_account) | **POST** /budgets/{plan_id}/accounts | Create an account
+[**get_account_by_id**](AccountsApi.md#get_account_by_id) | **GET** /budgets/{plan_id}/accounts/{account_id} | Get an account
+[**get_accounts**](AccountsApi.md#get_accounts) | **GET** /budgets/{plan_id}/accounts | Get all accounts
 
 
 # **create_account**
-> AccountResponse create_account(budget_id, data)
+> AccountResponse create_account(plan_id, data)
 
-Create a new account
+Create an account
 
 Creates a new account
 
@@ -47,12 +47,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.AccountsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget)
+    plan_id = 'plan_id_example' # str | The id of the plan (\"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan)
     data = ynab.PostAccountWrapper() # PostAccountWrapper | The account to create.
 
     try:
-        # Create a new account
-        api_response = api_instance.create_account(budget_id, data)
+        # Create an account
+        api_response = api_instance.create_account(plan_id, data)
         print("The response of AccountsApi->create_account:\n")
         pprint(api_response)
     except Exception as e:
@@ -66,7 +66,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget (\&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget) | 
+ **plan_id** | **str**| The id of the plan (\&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan) | 
  **data** | [**PostAccountWrapper**](PostAccountWrapper.md)| The account to create. | 
 
 ### Return type
@@ -92,9 +92,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_account_by_id**
-> AccountResponse get_account_by_id(budget_id, account_id)
+> AccountResponse get_account_by_id(plan_id, account_id)
 
-Single account
+Get an account
 
 Returns a single account
 
@@ -128,12 +128,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.AccountsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
-    account_id = 'account_id_example' # str | The id of the account
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
+    account_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The id of the account
 
     try:
-        # Single account
-        api_response = api_instance.get_account_by_id(budget_id, account_id)
+        # Get an account
+        api_response = api_instance.get_account_by_id(plan_id, account_id)
         print("The response of AccountsApi->get_account_by_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -147,8 +147,8 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
- **account_id** | **str**| The id of the account | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
+ **account_id** | **UUID**| The id of the account | 
 
 ### Return type
 
@@ -169,14 +169,13 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The requested account |  -  |
 **404** | The requested account was not found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_accounts**
-> AccountsResponse get_accounts(budget_id, last_knowledge_of_server=last_knowledge_of_server)
+> AccountsResponse get_accounts(plan_id, last_knowledge_of_server=last_knowledge_of_server)
 
-Account list
+Get all accounts
 
 Returns all accounts
 
@@ -210,12 +209,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.AccountsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # Account list
-        api_response = api_instance.get_accounts(budget_id, last_knowledge_of_server=last_knowledge_of_server)
+        # Get all accounts
+        api_response = api_instance.get_accounts(plan_id, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of AccountsApi->get_accounts:\n")
         pprint(api_response)
     except Exception as e:
@@ -229,7 +228,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
 ### Return type
@@ -251,7 +250,6 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The list of requested accounts |  -  |
 **404** | No accounts were found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
