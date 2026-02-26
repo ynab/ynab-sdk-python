@@ -28,18 +28,6 @@ files = [
 ]
 
 [[package]]
-name = "certifi"
-version = "2026.2.25"
-description = "Python package for providing Mozilla's CA Bundle."
-optional = false
-python-versions = ">=3.7"
-groups = ["main"]
-files = [
-    {file = "certifi-2026.2.25-py3-none-any.whl", hash = "sha256:027692e4402ad994f1c42e52a4997a9763c646b73e4096e4d5d6db8af1d6f0fa"},
-    {file = "certifi-2026.2.25.tar.gz", hash = "sha256:e887ab5cee78ea814d3472169153c2d12cd43b14bd03329a39a9c6e2e80bfba7"},
-]
-
-[[package]]
 name = "chardet"
 version = "5.2.0"
 description = "Universal encoding detector for Python 3"
@@ -738,4 +726,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.8"
-content-hash = "d77e1e47f222c63fc130336241c2713044aab8a8d7c6fe417c9e3fb99eb4932d"
+content-hash = "3878aa4f654cc34dcf86e0b42a319c5b8f2a9635dae56a630b962ada706622ed"
