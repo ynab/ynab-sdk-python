@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**budgeted** | **int** | Budgeted amount in milliunits format | 
+**budgeted** | **int** | Assigned (budgeted) amount in milliunits format | 
 
 ## Example
 

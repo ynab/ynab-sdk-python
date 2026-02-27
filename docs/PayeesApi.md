@@ -4,15 +4,15 @@ All URIs are relative to *https://api.ynab.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_payee_by_id**](PayeesApi.md#get_payee_by_id) | **GET** /budgets/{budget_id}/payees/{payee_id} | Single payee
-[**get_payees**](PayeesApi.md#get_payees) | **GET** /budgets/{budget_id}/payees | List payees
-[**update_payee**](PayeesApi.md#update_payee) | **PATCH** /budgets/{budget_id}/payees/{payee_id} | Update a payee
+[**get_payee_by_id**](PayeesApi.md#get_payee_by_id) | **GET** /budgets/{plan_id}/payees/{payee_id} | Get a payee
+[**get_payees**](PayeesApi.md#get_payees) | **GET** /budgets/{plan_id}/payees | Get all payees
+[**update_payee**](PayeesApi.md#update_payee) | **PATCH** /budgets/{plan_id}/payees/{payee_id} | Update a payee
 
 
 # **get_payee_by_id**
-> PayeeResponse get_payee_by_id(budget_id, payee_id)
+> PayeeResponse get_payee_by_id(plan_id, payee_id)
 
-Single payee
+Get a payee
 
 Returns a single payee
 
@@ -46,12 +46,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.PayeesApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     payee_id = 'payee_id_example' # str | The id of the payee
 
     try:
-        # Single payee
-        api_response = api_instance.get_payee_by_id(budget_id, payee_id)
+        # Get a payee
+        api_response = api_instance.get_payee_by_id(plan_id, payee_id)
         print("The response of PayeesApi->get_payee_by_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +65,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **payee_id** | **str**| The id of the payee | 
 
 ### Return type
@@ -87,14 +87,13 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The requested payee |  -  |
 **404** | The payee was not found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_payees**
-> PayeesResponse get_payees(budget_id, last_knowledge_of_server=last_knowledge_of_server)
+> PayeesResponse get_payees(plan_id, last_knowledge_of_server=last_knowledge_of_server)
 
-List payees
+Get all payees
 
 Returns all payees
 
@@ -128,12 +127,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.PayeesApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # List payees
-        api_response = api_instance.get_payees(budget_id, last_knowledge_of_server=last_knowledge_of_server)
+        # Get all payees
+        api_response = api_instance.get_payees(plan_id, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of PayeesApi->get_payees:\n")
         pprint(api_response)
     except Exception as e:
@@ -147,7 +146,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
 ### Return type
@@ -169,12 +168,11 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The requested list of payees |  -  |
 **404** | No payees were found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_payee**
-> SavePayeeResponse update_payee(budget_id, payee_id, data)
+> SavePayeeResponse update_payee(plan_id, payee_id, data)
 
 Update a payee
 
@@ -211,13 +209,13 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.PayeesApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     payee_id = 'payee_id_example' # str | The id of the payee
     data = ynab.PatchPayeeWrapper() # PatchPayeeWrapper | The payee to update
 
     try:
         # Update a payee
-        api_response = api_instance.update_payee(budget_id, payee_id, data)
+        api_response = api_instance.update_payee(plan_id, payee_id, data)
         print("The response of PayeesApi->update_payee:\n")
         pprint(api_response)
     except Exception as e:
@@ -231,7 +229,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **payee_id** | **str**| The id of the payee | 
  **data** | [**PatchPayeeWrapper**](PatchPayeeWrapper.md)| The payee to update | 
 

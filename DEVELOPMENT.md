@@ -2,7 +2,7 @@
 
 ## Setup
 
-- Install Poetry: `pip install poetry`
+- Install Poetry: `pipx install poetry`
 - Install dependencies: `poetry install`
 - Install [OpenAPI Generator](https://openapi-generator.tech/) (on macOS: `brew install openapi-generator`)
 - Run tests: `poetry run pytest`

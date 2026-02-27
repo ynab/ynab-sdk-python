@@ -1,20 +1,20 @@
-# ynab.BudgetsApi
+# ynab.PlansApi
 
 All URIs are relative to *https://api.ynab.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_budget_by_id**](BudgetsApi.md#get_budget_by_id) | **GET** /budgets/{budget_id} | Single budget
-[**get_budget_settings_by_id**](BudgetsApi.md#get_budget_settings_by_id) | **GET** /budgets/{budget_id}/settings | Budget Settings
-[**get_budgets**](BudgetsApi.md#get_budgets) | **GET** /budgets | List budgets
+[**get_plan_by_id**](PlansApi.md#get_plan_by_id) | **GET** /budgets/{plan_id} | Get a plan
+[**get_plan_settings_by_id**](PlansApi.md#get_plan_settings_by_id) | **GET** /budgets/{plan_id}/settings | Get plan settings
+[**get_plans**](PlansApi.md#get_plans) | **GET** /budgets | Get all plans
 
 
-# **get_budget_by_id**
-> BudgetDetailResponse get_budget_by_id(budget_id, last_knowledge_of_server=last_knowledge_of_server)
+# **get_plan_by_id**
+> PlanDetailResponse get_plan_by_id(plan_id, last_knowledge_of_server=last_knowledge_of_server)
 
-Single budget
+Get a plan
 
-Returns a single budget with all related entities.  This resource is effectively a full budget export.
+Returns a single plan with all related entities.  This resource is effectively a full plan export.
 
 ### Example
 
@@ -22,7 +22,7 @@ Returns a single budget with all related entities.  This resource is effectively
 
 ```python
 import ynab
-from ynab.models.budget_detail_response import BudgetDetailResponse
+from ynab.models.plan_detail_response import PlanDetailResponse
 from ynab.rest import ApiException
 from pprint import pprint
 
@@ -45,17 +45,17 @@ configuration = ynab.Configuration(
 # Enter a context with an instance of the API client
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ynab.BudgetsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    api_instance = ynab.PlansApi(api_client)
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # Single budget
-        api_response = api_instance.get_budget_by_id(budget_id, last_knowledge_of_server=last_knowledge_of_server)
-        print("The response of BudgetsApi->get_budget_by_id:\n")
+        # Get a plan
+        api_response = api_instance.get_plan_by_id(plan_id, last_knowledge_of_server=last_knowledge_of_server)
+        print("The response of PlansApi->get_plan_by_id:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BudgetsApi->get_budget_by_id: %s\n" % e)
+        print("Exception when calling PlansApi->get_plan_by_id: %s\n" % e)
 ```
 
 
@@ -65,12 +65,12 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
 ### Return type
 
-[**BudgetDetailResponse**](BudgetDetailResponse.md)
+[**PlanDetailResponse**](PlanDetailResponse.md)
 
 ### Authorization
 
@@ -85,18 +85,17 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The requested budget |  -  |
-**404** | The specified budget was not found |  -  |
-**0** | An error occurred |  -  |
+**200** | The requested plan |  -  |
+**404** | The specified plan was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_budget_settings_by_id**
-> BudgetSettingsResponse get_budget_settings_by_id(budget_id)
+# **get_plan_settings_by_id**
+> PlanSettingsResponse get_plan_settings_by_id(plan_id)
 
-Budget Settings
+Get plan settings
 
-Returns settings for a budget
+Returns settings for a plan
 
 ### Example
 
@@ -104,7 +103,7 @@ Returns settings for a budget
 
 ```python
 import ynab
-from ynab.models.budget_settings_response import BudgetSettingsResponse
+from ynab.models.plan_settings_response import PlanSettingsResponse
 from ynab.rest import ApiException
 from pprint import pprint
 
@@ -127,16 +126,16 @@ configuration = ynab.Configuration(
 # Enter a context with an instance of the API client
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ynab.BudgetsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    api_instance = ynab.PlansApi(api_client)
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
 
     try:
-        # Budget Settings
-        api_response = api_instance.get_budget_settings_by_id(budget_id)
-        print("The response of BudgetsApi->get_budget_settings_by_id:\n")
+        # Get plan settings
+        api_response = api_instance.get_plan_settings_by_id(plan_id)
+        print("The response of PlansApi->get_plan_settings_by_id:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BudgetsApi->get_budget_settings_by_id: %s\n" % e)
+        print("Exception when calling PlansApi->get_plan_settings_by_id: %s\n" % e)
 ```
 
 
@@ -146,11 +145,11 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
 
 ### Return type
 
-[**BudgetSettingsResponse**](BudgetSettingsResponse.md)
+[**PlanSettingsResponse**](PlanSettingsResponse.md)
 
 ### Authorization
 
@@ -165,18 +164,17 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The requested budget settings |  -  |
-**404** | The specified Budget was not found |  -  |
-**0** | An error occurred |  -  |
+**200** | The requested plan settings |  -  |
+**404** | The specified plan was not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_budgets**
-> BudgetSummaryResponse get_budgets(include_accounts=include_accounts)
+# **get_plans**
+> PlanSummaryResponse get_plans(include_accounts=include_accounts)
 
-List budgets
+Get all plans
 
-Returns budgets list with summary information
+Returns plans list with summary information
 
 ### Example
 
@@ -184,7 +182,7 @@ Returns budgets list with summary information
 
 ```python
 import ynab
-from ynab.models.budget_summary_response import BudgetSummaryResponse
+from ynab.models.plan_summary_response import PlanSummaryResponse
 from ynab.rest import ApiException
 from pprint import pprint
 
@@ -207,16 +205,16 @@ configuration = ynab.Configuration(
 # Enter a context with an instance of the API client
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ynab.BudgetsApi(api_client)
-    include_accounts = True # bool | Whether to include the list of budget accounts (optional)
+    api_instance = ynab.PlansApi(api_client)
+    include_accounts = True # bool | Whether to include the list of plan accounts (optional)
 
     try:
-        # List budgets
-        api_response = api_instance.get_budgets(include_accounts=include_accounts)
-        print("The response of BudgetsApi->get_budgets:\n")
+        # Get all plans
+        api_response = api_instance.get_plans(include_accounts=include_accounts)
+        print("The response of PlansApi->get_plans:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BudgetsApi->get_budgets: %s\n" % e)
+        print("Exception when calling PlansApi->get_plans: %s\n" % e)
 ```
 
 
@@ -226,11 +224,11 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **include_accounts** | **bool**| Whether to include the list of budget accounts | [optional] 
+ **include_accounts** | **bool**| Whether to include the list of plan accounts | [optional] 
 
 ### Return type
 
-[**BudgetSummaryResponse**](BudgetSummaryResponse.md)
+[**PlanSummaryResponse**](PlanSummaryResponse.md)
 
 ### Authorization
 
@@ -245,9 +243,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The list of budgets |  -  |
-**404** | No budgets were found |  -  |
-**0** | An error occurred |  -  |
+**200** | The list of plans |  -  |
+**404** | No plans were found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

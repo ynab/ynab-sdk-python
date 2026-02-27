@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | 
-**payee_id** | **str** |  | 
+**id** | **UUID** |  | 
+**payee_id** | **UUID** |  | 
 **latitude** | **str** |  | 
 **longitude** | **str** |  | 
 **deleted** | **bool** | Whether or not the payee location has been deleted.  Deleted payee locations will only be included in delta requests. | 

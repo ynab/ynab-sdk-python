@@ -4,21 +4,21 @@ All URIs are relative to *https://api.ynab.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_transaction**](TransactionsApi.md#create_transaction) | **POST** /budgets/{budget_id}/transactions | Create a single transaction or multiple transactions
-[**delete_transaction**](TransactionsApi.md#delete_transaction) | **DELETE** /budgets/{budget_id}/transactions/{transaction_id} | Deletes an existing transaction
-[**get_transaction_by_id**](TransactionsApi.md#get_transaction_by_id) | **GET** /budgets/{budget_id}/transactions/{transaction_id} | Single transaction
-[**get_transactions**](TransactionsApi.md#get_transactions) | **GET** /budgets/{budget_id}/transactions | List transactions
-[**get_transactions_by_account**](TransactionsApi.md#get_transactions_by_account) | **GET** /budgets/{budget_id}/accounts/{account_id}/transactions | List account transactions
-[**get_transactions_by_category**](TransactionsApi.md#get_transactions_by_category) | **GET** /budgets/{budget_id}/categories/{category_id}/transactions | List category transactions, excluding any pending transactions
-[**get_transactions_by_month**](TransactionsApi.md#get_transactions_by_month) | **GET** /budgets/{budget_id}/months/{month}/transactions | List transactions in month, excluding any pending transactions
-[**get_transactions_by_payee**](TransactionsApi.md#get_transactions_by_payee) | **GET** /budgets/{budget_id}/payees/{payee_id}/transactions | List payee transactions, excluding any pending transactions
-[**import_transactions**](TransactionsApi.md#import_transactions) | **POST** /budgets/{budget_id}/transactions/import | Import transactions
-[**update_transaction**](TransactionsApi.md#update_transaction) | **PUT** /budgets/{budget_id}/transactions/{transaction_id} | Updates an existing transaction
-[**update_transactions**](TransactionsApi.md#update_transactions) | **PATCH** /budgets/{budget_id}/transactions | Update multiple transactions
+[**create_transaction**](TransactionsApi.md#create_transaction) | **POST** /budgets/{plan_id}/transactions | Create a single transaction or multiple transactions
+[**delete_transaction**](TransactionsApi.md#delete_transaction) | **DELETE** /budgets/{plan_id}/transactions/{transaction_id} | Delete a transaction
+[**get_transaction_by_id**](TransactionsApi.md#get_transaction_by_id) | **GET** /budgets/{plan_id}/transactions/{transaction_id} | Get a transaction
+[**get_transactions**](TransactionsApi.md#get_transactions) | **GET** /budgets/{plan_id}/transactions | Get all transactions
+[**get_transactions_by_account**](TransactionsApi.md#get_transactions_by_account) | **GET** /budgets/{plan_id}/accounts/{account_id}/transactions | Get all account transactions
+[**get_transactions_by_category**](TransactionsApi.md#get_transactions_by_category) | **GET** /budgets/{plan_id}/categories/{category_id}/transactions | Get all category transactions
+[**get_transactions_by_month**](TransactionsApi.md#get_transactions_by_month) | **GET** /budgets/{plan_id}/months/{month}/transactions | Get all plan month transactions
+[**get_transactions_by_payee**](TransactionsApi.md#get_transactions_by_payee) | **GET** /budgets/{plan_id}/payees/{payee_id}/transactions | Get all payee transactions
+[**import_transactions**](TransactionsApi.md#import_transactions) | **POST** /budgets/{plan_id}/transactions/import | Import transactions
+[**update_transaction**](TransactionsApi.md#update_transaction) | **PUT** /budgets/{plan_id}/transactions/{transaction_id} | Update a transaction
+[**update_transactions**](TransactionsApi.md#update_transactions) | **PATCH** /budgets/{plan_id}/transactions | Update multiple transactions
 
 
 # **create_transaction**
-> SaveTransactionsResponse create_transaction(budget_id, data)
+> SaveTransactionsResponse create_transaction(plan_id, data)
 
 Create a single transaction or multiple transactions
 
@@ -55,12 +55,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     data = ynab.PostTransactionsWrapper() # PostTransactionsWrapper | The transaction or transactions to create.  To create a single transaction you can specify a value for the `transaction` object and to create multiple transactions you can specify an array of `transactions`.  It is expected that you will only provide a value for one of these objects.
 
     try:
         # Create a single transaction or multiple transactions
-        api_response = api_instance.create_transaction(budget_id, data)
+        api_response = api_instance.create_transaction(plan_id, data)
         print("The response of TransactionsApi->create_transaction:\n")
         pprint(api_response)
     except Exception as e:
@@ -74,7 +74,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **data** | [**PostTransactionsWrapper**](PostTransactionsWrapper.md)| The transaction or transactions to create.  To create a single transaction you can specify a value for the &#x60;transaction&#x60; object and to create multiple transactions you can specify an array of &#x60;transactions&#x60;.  It is expected that you will only provide a value for one of these objects. | 
 
 ### Return type
@@ -101,9 +101,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_transaction**
-> TransactionResponse delete_transaction(budget_id, transaction_id)
+> TransactionResponse delete_transaction(plan_id, transaction_id)
 
-Deletes an existing transaction
+Delete a transaction
 
 Deletes a transaction
 
@@ -137,12 +137,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     transaction_id = 'transaction_id_example' # str | The id of the transaction
 
     try:
-        # Deletes an existing transaction
-        api_response = api_instance.delete_transaction(budget_id, transaction_id)
+        # Delete a transaction
+        api_response = api_instance.delete_transaction(plan_id, transaction_id)
         print("The response of TransactionsApi->delete_transaction:\n")
         pprint(api_response)
     except Exception as e:
@@ -156,7 +156,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **transaction_id** | **str**| The id of the transaction | 
 
 ### Return type
@@ -182,9 +182,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transaction_by_id**
-> TransactionResponse get_transaction_by_id(budget_id, transaction_id)
+> TransactionResponse get_transaction_by_id(plan_id, transaction_id)
 
-Single transaction
+Get a transaction
 
 Returns a single transaction
 
@@ -218,12 +218,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     transaction_id = 'transaction_id_example' # str | The id of the transaction
 
     try:
-        # Single transaction
-        api_response = api_instance.get_transaction_by_id(budget_id, transaction_id)
+        # Get a transaction
+        api_response = api_instance.get_transaction_by_id(plan_id, transaction_id)
         print("The response of TransactionsApi->get_transaction_by_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -237,7 +237,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **transaction_id** | **str**| The id of the transaction | 
 
 ### Return type
@@ -259,16 +259,15 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The requested transaction |  -  |
 **404** | The transaction was not found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions**
-> TransactionsResponse get_transactions(budget_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> TransactionsResponse get_transactions(plan_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-List transactions
+Get all transactions
 
-Returns budget transactions, excluding any pending transactions
+Returns plan transactions, excluding any pending transactions
 
 ### Example
 
@@ -300,14 +299,14 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # List transactions
-        api_response = api_instance.get_transactions(budget_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get all transactions
+        api_response = api_instance.get_transactions(plan_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions:\n")
         pprint(api_response)
     except Exception as e:
@@ -321,7 +320,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
@@ -350,9 +349,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_account**
-> TransactionsResponse get_transactions_by_account(budget_id, account_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> TransactionsResponse get_transactions_by_account(plan_id, account_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-List account transactions
+Get all account transactions
 
 Returns all transactions for a specified account, excluding any pending transactions
 
@@ -386,15 +385,15 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     account_id = 'account_id_example' # str | The id of the account
     since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # List account transactions
-        api_response = api_instance.get_transactions_by_account(budget_id, account_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get all account transactions
+        api_response = api_instance.get_transactions_by_account(plan_id, account_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions_by_account:\n")
         pprint(api_response)
     except Exception as e:
@@ -408,7 +407,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **account_id** | **str**| The id of the account | 
  **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
@@ -433,16 +432,15 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The list of requested transactions |  -  |
 **404** | No transactions were found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_category**
-> HybridTransactionsResponse get_transactions_by_category(budget_id, category_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> HybridTransactionsResponse get_transactions_by_category(plan_id, category_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-List category transactions, excluding any pending transactions
+Get all category transactions
 
-Returns all transactions for a specified category
+Returns all transactions for a specified category, excluding any pending transactions
 
 ### Example
 
@@ -474,15 +472,15 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     category_id = 'category_id_example' # str | The id of the category
     since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # List category transactions, excluding any pending transactions
-        api_response = api_instance.get_transactions_by_category(budget_id, category_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get all category transactions
+        api_response = api_instance.get_transactions_by_category(plan_id, category_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions_by_category:\n")
         pprint(api_response)
     except Exception as e:
@@ -496,7 +494,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **category_id** | **str**| The id of the category | 
  **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
@@ -521,16 +519,15 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The list of requested transactions |  -  |
 **404** | No transactions were found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_month**
-> TransactionsResponse get_transactions_by_month(budget_id, month, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> TransactionsResponse get_transactions_by_month(plan_id, month, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-List transactions in month, excluding any pending transactions
+Get all plan month transactions
 
-Returns all transactions for a specified month
+Returns all transactions for a specified month, excluding any pending transactions
 
 ### Example
 
@@ -562,15 +559,15 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
-    month = 'month_example' # str | The budget month in ISO format (e.g. 2016-12-01) (\"current\" can also be used to specify the current calendar month (UTC))
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
+    month = 'month_example' # str | The plan month in ISO format (e.g. 2016-12-01) (\"current\" can also be used to specify the current calendar month (UTC))
     since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # List transactions in month, excluding any pending transactions
-        api_response = api_instance.get_transactions_by_month(budget_id, month, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get all plan month transactions
+        api_response = api_instance.get_transactions_by_month(plan_id, month, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions_by_month:\n")
         pprint(api_response)
     except Exception as e:
@@ -584,8 +581,8 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
- **month** | **str**| The budget month in ISO format (e.g. 2016-12-01) (\&quot;current\&quot; can also be used to specify the current calendar month (UTC)) | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
+ **month** | **str**| The plan month in ISO format (e.g. 2016-12-01) (\&quot;current\&quot; can also be used to specify the current calendar month (UTC)) | 
  **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
@@ -609,16 +606,15 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The list of requested transactions |  -  |
 **404** | No transactions were found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_payee**
-> HybridTransactionsResponse get_transactions_by_payee(budget_id, payee_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> HybridTransactionsResponse get_transactions_by_payee(plan_id, payee_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-List payee transactions, excluding any pending transactions
+Get all payee transactions
 
-Returns all transactions for a specified payee
+Returns all transactions for a specified payee, excluding any pending transactions
 
 ### Example
 
@@ -650,15 +646,15 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     payee_id = 'payee_id_example' # str | The id of the payee
     since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # List payee transactions, excluding any pending transactions
-        api_response = api_instance.get_transactions_by_payee(budget_id, payee_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get all payee transactions
+        api_response = api_instance.get_transactions_by_payee(plan_id, payee_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions_by_payee:\n")
         pprint(api_response)
     except Exception as e:
@@ -672,7 +668,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **payee_id** | **str**| The id of the payee | 
  **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
@@ -697,16 +693,15 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The list of requested transactions |  -  |
 **404** | No transactions were found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **import_transactions**
-> TransactionsImportResponse import_transactions(budget_id)
+> TransactionsImportResponse import_transactions(plan_id)
 
 Import transactions
 
-Imports available transactions on all linked accounts for the given budget.  Linked accounts allow transactions to be imported directly from a specified financial institution and this endpoint initiates that import.  Sending a request to this endpoint is the equivalent of clicking "Import" on each account in the web application or tapping the "New Transactions" banner in the mobile applications.  The response for this endpoint contains the transaction ids that have been imported.
+Imports available transactions on all linked accounts for the given plan.  Linked accounts allow transactions to be imported directly from a specified financial institution and this endpoint initiates that import.  Sending a request to this endpoint is the equivalent of clicking "Import" on each account in the web application or tapping the "New Transactions" banner in the mobile applications.  The response for this endpoint contains the transaction ids that have been imported.
 
 ### Example
 
@@ -738,11 +733,11 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
 
     try:
         # Import transactions
-        api_response = api_instance.import_transactions(budget_id)
+        api_response = api_instance.import_transactions(plan_id)
         print("The response of TransactionsApi->import_transactions:\n")
         pprint(api_response)
     except Exception as e:
@@ -756,7 +751,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
 
 ### Return type
 
@@ -782,9 +777,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_transaction**
-> TransactionResponse update_transaction(budget_id, transaction_id, data)
+> TransactionResponse update_transaction(plan_id, transaction_id, data)
 
-Updates an existing transaction
+Update a transaction
 
 Updates a single transaction
 
@@ -819,13 +814,13 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     transaction_id = 'transaction_id_example' # str | The id of the transaction
     data = ynab.PutTransactionWrapper() # PutTransactionWrapper | The transaction to update
 
     try:
-        # Updates an existing transaction
-        api_response = api_instance.update_transaction(budget_id, transaction_id, data)
+        # Update a transaction
+        api_response = api_instance.update_transaction(plan_id, transaction_id, data)
         print("The response of TransactionsApi->update_transaction:\n")
         pprint(api_response)
     except Exception as e:
@@ -839,7 +834,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **transaction_id** | **str**| The id of the transaction | 
  **data** | [**PutTransactionWrapper**](PutTransactionWrapper.md)| The transaction to update | 
 
@@ -866,7 +861,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_transactions**
-> SaveTransactionsResponse update_transactions(budget_id, data)
+> SaveTransactionsResponse update_transactions(plan_id, data)
 
 Update multiple transactions
 
@@ -903,12 +898,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     data = ynab.PatchTransactionsWrapper() # PatchTransactionsWrapper | The transactions to update. Each transaction must have either an `id` or `import_id` specified. If `id` is specified as null an `import_id` value can be provided which will allow transaction(s) to be updated by its `import_id`. If an `id` is specified, it will always be used for lookup.  You should not specify both `id` and `import_id`.  Updating an `import_id` on an existing transaction is not allowed; if an `import_id` is specified, it will only be used to lookup the transaction.
 
     try:
         # Update multiple transactions
-        api_response = api_instance.update_transactions(budget_id, data)
+        api_response = api_instance.update_transactions(plan_id, data)
         print("The response of TransactionsApi->update_transactions:\n")
         pprint(api_response)
     except Exception as e:
@@ -922,7 +917,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **data** | [**PatchTransactionsWrapper**](PatchTransactionsWrapper.md)| The transactions to update. Each transaction must have either an &#x60;id&#x60; or &#x60;import_id&#x60; specified. If &#x60;id&#x60; is specified as null an &#x60;import_id&#x60; value can be provided which will allow transaction(s) to be updated by its &#x60;import_id&#x60;. If an &#x60;id&#x60; is specified, it will always be used for lookup.  You should not specify both &#x60;id&#x60; and &#x60;import_id&#x60;.  Updating an &#x60;import_id&#x60; on an existing transaction is not allowed; if an &#x60;import_id&#x60; is specified, it will only be used to lookup the transaction. | 
 
 ### Return type

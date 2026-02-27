@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | 
+**id** | **UUID** |  | 
 **date_first** | **date** | The first date for which the Scheduled Transaction was scheduled. | 
 **date_next** | **date** | The next date for which the Scheduled Transaction is scheduled. | 
 **frequency** | **str** |  | 
@@ -13,10 +13,10 @@ Name | Type | Description | Notes
 **memo** | **str** |  | [optional] 
 **flag_color** | [**TransactionFlagColor**](TransactionFlagColor.md) |  | [optional] 
 **flag_name** | **str** | The customized name of a transaction flag | [optional] 
-**account_id** | **str** |  | 
-**payee_id** | **str** |  | [optional] 
-**category_id** | **str** |  | [optional] 
-**transfer_account_id** | **str** | If a transfer, the account_id which the scheduled transaction transfers to | [optional] 
+**account_id** | **UUID** |  | 
+**payee_id** | **UUID** |  | [optional] 
+**category_id** | **UUID** |  | [optional] 
+**transfer_account_id** | **UUID** | If a transfer, the account_id which the scheduled transaction transfers to | [optional] 
 **deleted** | **bool** | Whether or not the scheduled transaction has been deleted.  Deleted scheduled transactions will only be included in delta requests. | 
 **account_name** | **str** |  | 
 **payee_name** | **str** |  | [optional] 

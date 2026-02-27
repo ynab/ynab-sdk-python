@@ -26,15 +26,15 @@ class TestMonthsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_get_budget_month(self) -> None:
-        """Test case for get_budget_month
+    def test_get_plan_month(self) -> None:
+        """Test case for get_plan_month
 
         Single budget month
         """
         pass
 
-    def test_get_budget_months(self) -> None:
-        """Test case for get_budget_months
+    def test_get_plan_months(self) -> None:
+        """Test case for get_plan_months
 
         List budget months
         """

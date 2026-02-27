@@ -4,15 +4,15 @@ All URIs are relative to *https://api.ynab.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_payee_location_by_id**](PayeeLocationsApi.md#get_payee_location_by_id) | **GET** /budgets/{budget_id}/payee_locations/{payee_location_id} | Single payee location
-[**get_payee_locations**](PayeeLocationsApi.md#get_payee_locations) | **GET** /budgets/{budget_id}/payee_locations | List payee locations
-[**get_payee_locations_by_payee**](PayeeLocationsApi.md#get_payee_locations_by_payee) | **GET** /budgets/{budget_id}/payees/{payee_id}/payee_locations | List locations for a payee
+[**get_payee_location_by_id**](PayeeLocationsApi.md#get_payee_location_by_id) | **GET** /budgets/{plan_id}/payee_locations/{payee_location_id} | Get a payee location
+[**get_payee_locations**](PayeeLocationsApi.md#get_payee_locations) | **GET** /budgets/{plan_id}/payee_locations | Get all payee locations
+[**get_payee_locations_by_payee**](PayeeLocationsApi.md#get_payee_locations_by_payee) | **GET** /budgets/{plan_id}/payees/{payee_id}/payee_locations | Get all locations for a payee
 
 
 # **get_payee_location_by_id**
-> PayeeLocationResponse get_payee_location_by_id(budget_id, payee_location_id)
+> PayeeLocationResponse get_payee_location_by_id(plan_id, payee_location_id)
 
-Single payee location
+Get a payee location
 
 Returns a single payee location
 
@@ -46,12 +46,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.PayeeLocationsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     payee_location_id = 'payee_location_id_example' # str | id of payee location
 
     try:
-        # Single payee location
-        api_response = api_instance.get_payee_location_by_id(budget_id, payee_location_id)
+        # Get a payee location
+        api_response = api_instance.get_payee_location_by_id(plan_id, payee_location_id)
         print("The response of PayeeLocationsApi->get_payee_location_by_id:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +65,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **payee_location_id** | **str**| id of payee location | 
 
 ### Return type
@@ -87,14 +87,13 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The payee location |  -  |
 **404** | The payee location was not found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_payee_locations**
-> PayeeLocationsResponse get_payee_locations(budget_id)
+> PayeeLocationsResponse get_payee_locations(plan_id)
 
-List payee locations
+Get all payee locations
 
 Returns all payee locations
 
@@ -128,11 +127,11 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.PayeeLocationsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
 
     try:
-        # List payee locations
-        api_response = api_instance.get_payee_locations(budget_id)
+        # Get all payee locations
+        api_response = api_instance.get_payee_locations(plan_id)
         print("The response of PayeeLocationsApi->get_payee_locations:\n")
         pprint(api_response)
     except Exception as e:
@@ -146,7 +145,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
 
 ### Return type
 
@@ -167,14 +166,13 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The list of payee locations |  -  |
 **404** | No payees locations were found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_payee_locations_by_payee**
-> PayeeLocationsResponse get_payee_locations_by_payee(budget_id, payee_id)
+> PayeeLocationsResponse get_payee_locations_by_payee(plan_id, payee_id)
 
-List locations for a payee
+Get all locations for a payee
 
 Returns all payee locations for a specified payee
 
@@ -208,12 +206,12 @@ configuration = ynab.Configuration(
 with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.PayeeLocationsApi(api_client)
-    budget_id = 'budget_id_example' # str | The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget).
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     payee_id = 'payee_id_example' # str | id of payee
 
     try:
-        # List locations for a payee
-        api_response = api_instance.get_payee_locations_by_payee(budget_id, payee_id)
+        # Get all locations for a payee
+        api_response = api_instance.get_payee_locations_by_payee(plan_id, payee_id)
         print("The response of PayeeLocationsApi->get_payee_locations_by_payee:\n")
         pprint(api_response)
     except Exception as e:
@@ -227,7 +225,7 @@ with ynab.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **budget_id** | **str**| The id of the budget. \&quot;last-used\&quot; can be used to specify the last used budget and \&quot;default\&quot; can be used if default budget selection is enabled (see: https://api.ynab.com/#oauth-default-budget). | 
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **payee_id** | **str**| id of payee | 
 
 ### Return type
@@ -249,7 +247,6 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The list of requested payee locations |  -  |
 **404** | No payees locations were found |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

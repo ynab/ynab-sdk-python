@@ -4,13 +4,13 @@ All URIs are relative to *https://api.ynab.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_user**](UserApi.md#get_user) | **GET** /user | User info
+[**get_user**](UserApi.md#get_user) | **GET** /user | Get user
 
 
 # **get_user**
 > UserResponse get_user()
 
-User info
+Get user
 
 Returns authenticated user information
 
@@ -46,7 +46,7 @@ with ynab.ApiClient(configuration) as api_client:
     api_instance = ynab.UserApi(api_client)
 
     try:
-        # User info
+        # Get user
         api_response = api_instance.get_user()
         print("The response of UserApi->get_user:\n")
         pprint(api_response)
@@ -78,7 +78,6 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The user info |  -  |
-**0** | An error occurred |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
