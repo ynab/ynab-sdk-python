@@ -9,7 +9,6 @@
 
 ## Generating
 
-1. Change `packageVersion` in `openapi-generator-config.yaml`
 1. Run `scripts/generate.sh`.
 
 ## Publishing
