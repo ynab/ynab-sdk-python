@@ -311,7 +311,7 @@ class ApiClient:
                 return_data = self.__deserialize_file(response_data)
             elif response_type is not None:
                 match = None
-                content_type = response_data.headers.get('content-type')
+                content_type = response_data.getheader('content-type')
                 if content_type is not None:
                     match = re.search(r"charset=([a-zA-Z\-\d]+)[\s;]?", content_type)
                 encoding = match.group(1) if match else "utf-8"
@@ -328,7 +328,7 @@ class ApiClient:
         return ApiResponse(
             status_code = response_data.status,
             data = return_data,
-            headers = response_data.headers,
+            headers = response_data.getheaders(),
             raw_data = response_data.data
         )
 
