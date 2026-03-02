@@ -43,7 +43,7 @@ jobs:
         run: |
           git add ynab/configuration.py ynab/api_client.py ynab/__init__.py pyproject.toml openapi-generator-config.yaml
           git commit -m 'Bumping version for ${{ steps.bump_version.outputs.new_version }}'
-          git push gh-origin HEAD:main
+          git push
       - name: Publish to PyPI
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.POETRY_PYPI_TOKEN_PYPI }}
