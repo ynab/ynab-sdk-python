@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-        token: ${{ secrets.GH_API_TOKEN }}      
+        token: ${{ secrets.GH_API_TOKEN }}
+      - name: Setup git repo        
         run: |
           git config user.name $GITHUB_ACTOR
           git config user.email gh-actions-${GITHUB_ACTOR}@github.com          
