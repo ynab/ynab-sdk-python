@@ -14,15 +14,11 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup git repo
-        env:
-          GH_USERNAME: ${{ vars.GH_USER_NAME }}
-          GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}          
+      - uses: actions/checkout@v6
+        token: ${{ secrets.GH_API_TOKEN }}      
         run: |
           git config user.name $GITHUB_ACTOR
-          git config user.email gh-actions-${GITHUB_ACTOR}@github.com
-          git remote add gh-origin https://${GH_USERNAME}:${GH_API_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git config user.email gh-actions-${GITHUB_ACTOR}@github.com          
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
