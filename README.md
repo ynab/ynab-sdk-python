@@ -57,9 +57,9 @@ Class | Method | Description
 **AccountsApi** | [**create_account**](docs/AccountsApi.md#create_account) | Create an account
 &nbsp; | [**get_account_by_id**](docs/AccountsApi.md#get_account_by_id) | Get an account
 &nbsp; | [**get_accounts**](docs/AccountsApi.md#get_accounts) | Get all accounts
-**BudgetsApi** | [**get_plan_by_id**](docs/BudgetsApi.md#get_plan_by_id) | Get a plan
-&nbsp; | [**get_plan_settings_by_id**](docs/BudgetsApi.md#get_plan_settings_by_id) | Get plan settings
-&nbsp; | [**get_plans**](docs/BudgetsApi.md#get_plans) | Get all plans
+**PlansApi** | [**get_plan_by_id**](docs/PlansApi.md#get_plan_by_id) | Get a plan
+&nbsp; | [**get_plan_settings_by_id**](docs/PlansApi.md#get_plan_settings_by_id) | Get plan settings
+&nbsp; | [**get_plans**](docs/PlansApi.md#get_plans) | Get all plans
 **CategoriesApi** | [**create_category**](docs/CategoriesApi.md#create_category) | Create a category
 &nbsp; | [**create_category_group**](docs/CategoriesApi.md#create_category_group) | Create a category group
 &nbsp; | [**get_categories**](docs/CategoriesApi.md#get_categories) | Get all categories
