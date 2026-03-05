@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**budget** | [**PlanDetail**](PlanDetail.md) |  | 
+**plan** | [**PlanDetail**](PlanDetail.md) |  | 
 **server_knowledge** | **int** | The knowledge of the server | 
 
 ## Example

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**budgets** | [**List[PlanSummary]**](PlanSummary.md) |  | 
-**default_budget** | [**PlanSummary**](PlanSummary.md) |  | [optional] 
+**plans** | [**List[PlanSummary]**](PlanSummary.md) |  | 
+**default_plan** | [**PlanSummary**](PlanSummary.md) |  | [optional] 
 
 ## Example
 
