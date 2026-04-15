@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **transfer_account_id** | **UUID** | If a transfer, the account_id which the subtransaction transfers to | [optional] 
 **transfer_transaction_id** | **str** | If a transfer, the id of transaction on the other side of the transfer | [optional] 
 **deleted** | **bool** | Whether or not the subtransaction has been deleted.  Deleted subtransactions will only be included in delta requests. | 
+**amount_formatted** | **str** | The subtransaction amount formatted in the plan&#39;s currency format | [optional] 
+**amount_currency** | **float** | The subtransaction amount as a decimal currency amount | [optional] 
 
 ## Example
 

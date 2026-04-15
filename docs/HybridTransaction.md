@@ -24,6 +24,8 @@ Name | Type | Description | Notes
 **import_payee_name_original** | **str** | If the transaction was imported, the original payee name as it appeared on the statement | [optional] 
 **debt_transaction_type** | **str** | If the transaction is a debt/loan account transaction, the type of transaction | [optional] 
 **deleted** | **bool** | Whether or not the transaction has been deleted.  Deleted transactions will only be included in delta requests. | 
+**amount_formatted** | **str** | The transaction amount formatted in the plan&#39;s currency format | [optional] 
+**amount_currency** | **float** | The transaction amount as a decimal currency amount | [optional] 
 **type** | **str** | Whether the hybrid transaction represents a regular transaction or a subtransaction | 
 **parent_transaction_id** | **str** | For subtransaction types, this is the id of the parent transaction.  For transaction types, this id will be always be null. | [optional] 
 **account_name** | **str** |  | 

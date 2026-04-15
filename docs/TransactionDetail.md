@@ -24,6 +24,8 @@ Name | Type | Description | Notes
 **import_payee_name_original** | **str** | If the transaction was imported, the original payee name as it appeared on the statement | [optional] 
 **debt_transaction_type** | **str** | If the transaction is a debt/loan account transaction, the type of transaction | [optional] 
 **deleted** | **bool** | Whether or not the transaction has been deleted.  Deleted transactions will only be included in delta requests. | 
+**amount_formatted** | **str** | The transaction amount formatted in the plan&#39;s currency format | [optional] 
+**amount_currency** | **float** | The transaction amount as a decimal currency amount | [optional] 
 **account_name** | **str** |  | 
 **payee_name** | **str** |  | [optional] 
 **category_name** | **str** | The name of the category.  If a split transaction, this will be &#39;Split&#39;. | [optional] 
