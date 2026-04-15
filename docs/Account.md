@@ -23,6 +23,12 @@ Name | Type | Description | Notes
 **debt_minimum_payments** | **Dict[str, int]** |  | [optional] 
 **debt_escrow_amounts** | **Dict[str, int]** |  | [optional] 
 **deleted** | **bool** | Whether or not the account has been deleted.  Deleted accounts will only be included in delta requests. | 
+**balance_formatted** | **str** | The current available balance of the account formatted in the plan&#39;s currency format | [optional] 
+**balance_currency** | **float** | The current available balance of the account as a decimal currency amount | [optional] 
+**cleared_balance_formatted** | **str** | The current cleared balance of the account formatted in the plan&#39;s currency format | [optional] 
+**cleared_balance_currency** | **float** | The current cleared balance of the account as a decimal currency amount | [optional] 
+**uncleared_balance_formatted** | **str** | The current uncleared balance of the account formatted in the plan&#39;s currency format | [optional] 
+**uncleared_balance_currency** | **float** | The current uncleared balance of the account as a decimal currency amount | [optional] 
 
 ## Example
 

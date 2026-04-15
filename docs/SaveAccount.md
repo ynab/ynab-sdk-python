@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | The name of the account | 
-**type** | [**AccountType**](AccountType.md) |  | 
+**type** | [**SaveAccountType**](SaveAccountType.md) |  | 
 **balance** | **int** | The current balance of the account in milliunits format | 
 
 ## Example

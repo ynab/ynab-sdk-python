@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The name of the payee. The name must be a maximum of 500 characters. | [optional] 
+**name** | **str** | The name of the payee. | [optional] 
 
 ## Example
 

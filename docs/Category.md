@@ -31,6 +31,20 @@ Name | Type | Description | Notes
 **goal_overall_left** | **int** | The amount of funding still needed to complete the goal within the current goal period. | [optional] 
 **goal_snoozed_at** | **datetime** | The date/time the goal was snoozed.  If the goal is not snoozed, this will be null. | [optional] 
 **deleted** | **bool** | Whether or not the category has been deleted.  Deleted categories will only be included in delta requests. | 
+**balance_formatted** | **str** | Available balance of the category formatted in the plan&#39;s currency format | [optional] 
+**balance_currency** | **float** | Available balance of the category as a decimal currency amount | [optional] 
+**activity_formatted** | **str** | Activity of the category formatted in the plan&#39;s currency format | [optional] 
+**activity_currency** | **float** | Activity of the category as a decimal currency amount | [optional] 
+**budgeted_formatted** | **str** | Assigned (budgeted) amount of the category formatted in the plan&#39;s currency format | [optional] 
+**budgeted_currency** | **float** | Assigned (budgeted) amount of the category as a decimal currency amount | [optional] 
+**goal_target_formatted** | **str** | The goal target amount formatted in the plan&#39;s currency format | [optional] 
+**goal_target_currency** | **float** | The goal target amount as a decimal currency amount | [optional] 
+**goal_under_funded_formatted** | **str** | The goal underfunded amount formatted in the plan&#39;s currency format | [optional] 
+**goal_under_funded_currency** | **float** | The goal underfunded amount as a decimal currency amount | [optional] 
+**goal_overall_funded_formatted** | **str** | The total amount funded towards the goal formatted in the plan&#39;s currency format | [optional] 
+**goal_overall_funded_currency** | **float** | The total amount funded towards the goal as a decimal currency amount | [optional] 
+**goal_overall_left_formatted** | **str** | The amount of funding still needed to complete the goal formatted in the plan&#39;s currency format | [optional] 
+**goal_overall_left_currency** | **float** | The amount of funding still needed to complete the goal as a decimal currency amount | [optional] 
 
 ## Example
 

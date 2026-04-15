@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **from_category_id** | **UUID** | The id of the category the money was moved from | [optional] 
 **to_category_id** | **UUID** | The id of the category the money was moved to | [optional] 
 **amount** | **int** | The amount of the money movement in milliunits format | 
+**amount_formatted** | **str** | The money movement amount formatted in the plan&#39;s currency format | [optional] 
+**amount_currency** | **float** | The money movement amount as a decimal currency amount | [optional] 
 
 ## Example
 

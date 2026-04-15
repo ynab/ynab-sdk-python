@@ -12,16 +12,16 @@ Name | Type | Description | Notes
 **last_month** | **date** | The latest plan month | [optional] 
 **date_format** | [**DateFormat**](DateFormat.md) |  | [optional] 
 **currency_format** | [**CurrencyFormat**](CurrencyFormat.md) |  | [optional] 
-**accounts** | [**List[Account]**](Account.md) |  | [optional] 
+**accounts** | [**List[AccountBase]**](AccountBase.md) |  | [optional] 
 **payees** | [**List[Payee]**](Payee.md) |  | [optional] 
 **payee_locations** | [**List[PayeeLocation]**](PayeeLocation.md) |  | [optional] 
 **category_groups** | [**List[CategoryGroup]**](CategoryGroup.md) |  | [optional] 
-**categories** | [**List[Category]**](Category.md) |  | [optional] 
-**months** | [**List[MonthDetail]**](MonthDetail.md) |  | [optional] 
-**transactions** | [**List[TransactionSummary]**](TransactionSummary.md) |  | [optional] 
-**subtransactions** | [**List[SubTransaction]**](SubTransaction.md) |  | [optional] 
-**scheduled_transactions** | [**List[ScheduledTransactionSummary]**](ScheduledTransactionSummary.md) |  | [optional] 
-**scheduled_subtransactions** | [**List[ScheduledSubTransaction]**](ScheduledSubTransaction.md) |  | [optional] 
+**categories** | [**List[CategoryBase]**](CategoryBase.md) |  | [optional] 
+**months** | [**List[MonthDetailBase]**](MonthDetailBase.md) |  | [optional] 
+**transactions** | [**List[TransactionSummaryBase]**](TransactionSummaryBase.md) |  | [optional] 
+**subtransactions** | [**List[SubTransactionBase]**](SubTransactionBase.md) |  | [optional] 
+**scheduled_transactions** | [**List[ScheduledTransactionSummaryBase]**](ScheduledTransactionSummaryBase.md) |  | [optional] 
+**scheduled_subtransactions** | [**List[ScheduledSubTransactionBase]**](ScheduledSubTransactionBase.md) |  | [optional] 
 
 ## Example
 

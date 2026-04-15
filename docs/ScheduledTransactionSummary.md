@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **category_id** | **UUID** |  | [optional] 
 **transfer_account_id** | **UUID** | If a transfer, the account_id which the scheduled transaction transfers to | [optional] 
 **deleted** | **bool** | Whether or not the scheduled transaction has been deleted.  Deleted scheduled transactions will only be included in delta requests. | 
+**amount_formatted** | **str** | The scheduled transaction amount formatted in the plan&#39;s currency format | [optional] 
+**amount_currency** | **float** | The scheduled transaction amount as a decimal currency amount | [optional] 
 
 ## Example
 

@@ -4,10 +4,93 @@ All URIs are relative to *https://api.ynab.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_payee**](PayeesApi.md#create_payee) | **POST** /plans/{plan_id}/payees | Create a payee
 [**get_payee_by_id**](PayeesApi.md#get_payee_by_id) | **GET** /plans/{plan_id}/payees/{payee_id} | Get a payee
 [**get_payees**](PayeesApi.md#get_payees) | **GET** /plans/{plan_id}/payees | Get all payees
 [**update_payee**](PayeesApi.md#update_payee) | **PATCH** /plans/{plan_id}/payees/{payee_id} | Update a payee
 
+
+# **create_payee**
+> SavePayeeResponse create_payee(plan_id, data)
+
+Create a payee
+
+Creates a new payee
+
+### Example
+
+* Bearer Authentication (bearer):
+
+```python
+import ynab
+from ynab.models.post_payee_wrapper import PostPayeeWrapper
+from ynab.models.save_payee_response import SavePayeeResponse
+from ynab.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.ynab.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ynab.Configuration(
+    host = "https://api.ynab.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearer
+configuration = ynab.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ynab.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ynab.PayeesApi(api_client)
+    plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
+    data = ynab.PostPayeeWrapper() # PostPayeeWrapper | The payee to create
+
+    try:
+        # Create a payee
+        api_response = api_instance.create_payee(plan_id, data)
+        print("The response of PayeesApi->create_payee:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PayeesApi->create_payee: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
+ **data** | [**PostPayeeWrapper**](PostPayeeWrapper.md)| The payee to create | 
+
+### Return type
+
+[**SavePayeeResponse**](SavePayeeResponse.md)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | The payee was successfully created |  -  |
+**400** | The request could not be understood due to malformed syntax or validation error(s) |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_payee_by_id**
 > PayeeResponse get_payee_by_id(plan_id, payee_id)
