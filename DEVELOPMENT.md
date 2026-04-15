@@ -9,7 +9,7 @@
 
 ## Generating
 
-1. Run `scripts/generate.sh`.
+1. Run `scripts/generate.sh`.  This will generate the API client from the latest OpenAPI spec. Once generated, you should open a PR and merge the changes.
 
 ## Publishing
 
