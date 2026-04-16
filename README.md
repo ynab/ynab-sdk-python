@@ -73,7 +73,8 @@ Class | Method | Description
 **PayeeLocationsApi** | [**get_payee_location_by_id**](docs/PayeeLocationsApi.md#get_payee_location_by_id) | Get a payee location
 &nbsp; | [**get_payee_locations**](docs/PayeeLocationsApi.md#get_payee_locations) | Get all payee locations
 &nbsp; | [**get_payee_locations_by_payee**](docs/PayeeLocationsApi.md#get_payee_locations_by_payee) | Get all locations for a payee
-**PayeesApi** | [**get_payee_by_id**](docs/PayeesApi.md#get_payee_by_id) | Get a payee
+**PayeesApi** | [**create_payee**](docs/PayeesApi.md#create_payee) | Create a payee
+&nbsp; | [**get_payee_by_id**](docs/PayeesApi.md#get_payee_by_id) | Get a payee
 &nbsp; | [**get_payees**](docs/PayeesApi.md#get_payees) | Get all payees
 &nbsp; | [**update_payee**](docs/PayeesApi.md#update_payee) | Update a payee
 **MoneyMovementsApi** | [**get_money_movement_groups**](docs/MoneyMovementsApi.md#get_money_movement_groups) | Get all money movement groups
