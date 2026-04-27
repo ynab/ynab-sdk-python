@@ -49,6 +49,28 @@ with ynab.ApiClient(configuration) as api_client:
         print(plan.name) 
 ```
 
+Async clients are available side by side with the synchronous clients:
+
+```python
+import asyncio
+import ynab
+
+configuration = ynab.Configuration(
+    access_token = "b43439eaafe2_this_is_fake_b43439eaafe2"
+)
+
+async def main():
+    async with ynab.AsyncApiClient(configuration) as api_client:
+        plans_api = ynab.AsyncPlansApi(api_client)
+        plans_response = await plans_api.get_plans()
+        plans = plans_response.data.budgets
+
+        for plan in plans:
+            print(plan.name)
+
+asyncio.run(main())
+```
+
 ## Methods
 
 Class | Method | Description

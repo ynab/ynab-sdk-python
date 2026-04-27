@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.0.0"
+__version__ = "4.1.0"
 
 # Define package exports
 __all__ = [
@@ -28,8 +28,19 @@ __all__ = [
     "ScheduledTransactionsApi",
     "TransactionsApi",
     "UserApi",
+    "AsyncAccountsApi",
+    "AsyncCategoriesApi",
+    "AsyncMoneyMovementsApi",
+    "AsyncMonthsApi",
+    "AsyncPayeeLocationsApi",
+    "AsyncPayeesApi",
+    "AsyncPlansApi",
+    "AsyncScheduledTransactionsApi",
+    "AsyncTransactionsApi",
+    "AsyncUserApi",
     "ApiResponse",
     "ApiClient",
+    "AsyncApiClient",
     "Configuration",
     "OpenApiException",
     "ApiTypeError",
@@ -173,9 +184,21 @@ from ynab.api.scheduled_transactions_api import ScheduledTransactionsApi as Sche
 from ynab.api.transactions_api import TransactionsApi as TransactionsApi
 from ynab.api.user_api import UserApi as UserApi
 
+from ynab.async_api.accounts_api import AsyncAccountsApi as AsyncAccountsApi
+from ynab.async_api.categories_api import AsyncCategoriesApi as AsyncCategoriesApi
+from ynab.async_api.money_movements_api import AsyncMoneyMovementsApi as AsyncMoneyMovementsApi
+from ynab.async_api.months_api import AsyncMonthsApi as AsyncMonthsApi
+from ynab.async_api.payee_locations_api import AsyncPayeeLocationsApi as AsyncPayeeLocationsApi
+from ynab.async_api.payees_api import AsyncPayeesApi as AsyncPayeesApi
+from ynab.async_api.plans_api import AsyncPlansApi as AsyncPlansApi
+from ynab.async_api.scheduled_transactions_api import AsyncScheduledTransactionsApi as AsyncScheduledTransactionsApi
+from ynab.async_api.transactions_api import AsyncTransactionsApi as AsyncTransactionsApi
+from ynab.async_api.user_api import AsyncUserApi as AsyncUserApi
+
 # import ApiClient
 from ynab.api_response import ApiResponse as ApiResponse
 from ynab.api_client import ApiClient as ApiClient
+from ynab.async_api_client import AsyncApiClient as AsyncApiClient
 from ynab.configuration import Configuration as Configuration
 from ynab.exceptions import OpenApiException as OpenApiException
 from ynab.exceptions import ApiTypeError as ApiTypeError

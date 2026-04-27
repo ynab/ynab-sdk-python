@@ -29,7 +29,7 @@ from pydantic import SecretStr
 from ynab.configuration import Configuration
 from ynab.api_response import ApiResponse, T as ApiResponseT
 import ynab.models
-from ynab import rest
+from ynab import async_rest as rest
 from ynab.exceptions import (
     ApiValueError,
     ApiException,
@@ -42,7 +42,7 @@ from ynab.exceptions import (
 
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
 
-class ApiClient:
+class AsyncApiClient:
     """Generic API client for OpenAPI client library builds.
 
     OpenAPI generic API client. This client handles the client-
@@ -94,11 +94,14 @@ class ApiClient:
         self.user_agent = 'OpenAPI-Generator/4.1.0/python'
         self.client_side_validation = configuration.client_side_validation
 
-    def __enter__(self):
+    async def __aenter__(self):
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback):
-        pass
+    async def __aexit__(self, exc_type, exc_value, traceback):
+        await self.close()
+
+    async def close(self):
+        await self.rest_client.close()
 
     @property
     def user_agent(self):
@@ -120,13 +123,13 @@ class ApiClient:
         """Return new instance of ApiClient.
 
         This method returns newly created, based on default constructor,
-        object of ApiClient class or returns a copy of default
+        object of AsyncApiClient class or returns a copy of default
         ApiClient.
 
-        :return: The ApiClient object.
+        :return: The AsyncApiClient object.
         """
         if cls._default is None:
-            cls._default = ApiClient()
+            cls._default = AsyncApiClient()
         return cls._default
 
     @classmethod
@@ -135,7 +138,7 @@ class ApiClient:
 
         It stores default ApiClient.
 
-        :param default: object of ApiClient.
+        :param default: object of AsyncApiClient.
         """
         cls._default = default
 
@@ -248,7 +251,7 @@ class ApiClient:
         return method, url, header_params, body, post_params
 
 
-    def call_api(
+    async def call_api(
         self,
         method,
         url,
@@ -271,7 +274,7 @@ class ApiClient:
 
         try:
             # perform request and return response
-            response_data = self.rest_client.request(
+            response_data = await self.rest_client.request(
                 method, url,
                 headers=header_params,
                 body=body, post_params=post_params,
