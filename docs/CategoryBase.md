@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **category_group_name** | **str** |  | [optional] 
 **name** | **str** |  | 
 **hidden** | **bool** | Whether or not the category is hidden | 
+**internal** | **bool** | Whether or not the category is internal | 
 **original_category_group_id** | **UUID** | DEPRECATED: No longer used.  Value will always be null. | [optional] 
 **note** | **str** |  | [optional] 
 **budgeted** | **int** | Assigned (budgeted) amount in milliunits format | 
