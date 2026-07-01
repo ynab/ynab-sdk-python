@@ -7,11 +7,11 @@ Method | HTTP request | Description
 [**create_transaction**](TransactionsApi.md#create_transaction) | **POST** /plans/{plan_id}/transactions | Create a single transaction or multiple transactions
 [**delete_transaction**](TransactionsApi.md#delete_transaction) | **DELETE** /plans/{plan_id}/transactions/{transaction_id} | Delete a transaction
 [**get_transaction_by_id**](TransactionsApi.md#get_transaction_by_id) | **GET** /plans/{plan_id}/transactions/{transaction_id} | Get a transaction
-[**get_transactions**](TransactionsApi.md#get_transactions) | **GET** /plans/{plan_id}/transactions | Get all transactions
-[**get_transactions_by_account**](TransactionsApi.md#get_transactions_by_account) | **GET** /plans/{plan_id}/accounts/{account_id}/transactions | Get all account transactions
-[**get_transactions_by_category**](TransactionsApi.md#get_transactions_by_category) | **GET** /plans/{plan_id}/categories/{category_id}/transactions | Get all category transactions
-[**get_transactions_by_month**](TransactionsApi.md#get_transactions_by_month) | **GET** /plans/{plan_id}/months/{month}/transactions | Get all plan month transactions
-[**get_transactions_by_payee**](TransactionsApi.md#get_transactions_by_payee) | **GET** /plans/{plan_id}/payees/{payee_id}/transactions | Get all payee transactions
+[**get_transactions**](TransactionsApi.md#get_transactions) | **GET** /plans/{plan_id}/transactions | Get transactions
+[**get_transactions_by_account**](TransactionsApi.md#get_transactions_by_account) | **GET** /plans/{plan_id}/accounts/{account_id}/transactions | Get account transactions
+[**get_transactions_by_category**](TransactionsApi.md#get_transactions_by_category) | **GET** /plans/{plan_id}/categories/{category_id}/transactions | Get category transactions
+[**get_transactions_by_month**](TransactionsApi.md#get_transactions_by_month) | **GET** /plans/{plan_id}/months/{month}/transactions | Get plan month transactions
+[**get_transactions_by_payee**](TransactionsApi.md#get_transactions_by_payee) | **GET** /plans/{plan_id}/payees/{payee_id}/transactions | Get payee transactions
 [**import_transactions**](TransactionsApi.md#import_transactions) | **POST** /plans/{plan_id}/transactions/import | Import transactions
 [**update_transaction**](TransactionsApi.md#update_transaction) | **PUT** /plans/{plan_id}/transactions/{transaction_id} | Update a transaction
 [**update_transactions**](TransactionsApi.md#update_transactions) | **PATCH** /plans/{plan_id}/transactions | Update multiple transactions
@@ -263,9 +263,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions**
-> TransactionsResponse get_transactions(plan_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> TransactionsResponse get_transactions(plan_id, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-Get all transactions
+Get transactions
 
 Returns plan transactions, excluding any pending transactions
 
@@ -300,13 +300,14 @@ with ynab.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ynab.TransactionsApi(api_client)
     plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
-    since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
+    since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified. (optional)
+    until_date = '2013-10-20' # date | If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # Get all transactions
-        api_response = api_instance.get_transactions(plan_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get transactions
+        api_response = api_instance.get_transactions(plan_id, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions:\n")
         pprint(api_response)
     except Exception as e:
@@ -321,7 +322,8 @@ with ynab.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
- **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
+ **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified. | [optional] 
+ **until_date** | **date**| If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
@@ -349,9 +351,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_account**
-> TransactionsResponse get_transactions_by_account(plan_id, account_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> TransactionsResponse get_transactions_by_account(plan_id, account_id, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-Get all account transactions
+Get account transactions
 
 Returns all transactions for a specified account, excluding any pending transactions
 
@@ -387,13 +389,14 @@ with ynab.ApiClient(configuration) as api_client:
     api_instance = ynab.TransactionsApi(api_client)
     plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     account_id = 'account_id_example' # str | The id of the account
-    since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
+    since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified. (optional)
+    until_date = '2013-10-20' # date | If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # Get all account transactions
-        api_response = api_instance.get_transactions_by_account(plan_id, account_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get account transactions
+        api_response = api_instance.get_transactions_by_account(plan_id, account_id, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions_by_account:\n")
         pprint(api_response)
     except Exception as e:
@@ -409,7 +412,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **account_id** | **str**| The id of the account | 
- **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
+ **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified. | [optional] 
+ **until_date** | **date**| If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
@@ -436,9 +440,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_category**
-> HybridTransactionsResponse get_transactions_by_category(plan_id, category_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> HybridTransactionsResponse get_transactions_by_category(plan_id, category_id, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-Get all category transactions
+Get category transactions
 
 Returns all transactions for a specified category, excluding any pending transactions
 
@@ -474,13 +478,14 @@ with ynab.ApiClient(configuration) as api_client:
     api_instance = ynab.TransactionsApi(api_client)
     plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     category_id = 'category_id_example' # str | The id of the category
-    since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
+    since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified. (optional)
+    until_date = '2013-10-20' # date | If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # Get all category transactions
-        api_response = api_instance.get_transactions_by_category(plan_id, category_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get category transactions
+        api_response = api_instance.get_transactions_by_category(plan_id, category_id, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions_by_category:\n")
         pprint(api_response)
     except Exception as e:
@@ -496,7 +501,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **category_id** | **str**| The id of the category | 
- **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
+ **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified. | [optional] 
+ **until_date** | **date**| If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
@@ -523,9 +529,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_month**
-> TransactionsResponse get_transactions_by_month(plan_id, month, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> TransactionsResponse get_transactions_by_month(plan_id, month, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-Get all plan month transactions
+Get plan month transactions
 
 Returns all transactions for a specified month, excluding any pending transactions
 
@@ -562,12 +568,13 @@ with ynab.ApiClient(configuration) as api_client:
     plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     month = 'month_example' # str | The plan month in ISO format (e.g. 2016-12-01) (\"current\" can also be used to specify the current calendar month (UTC))
     since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
+    until_date = '2013-10-20' # date | If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # Get all plan month transactions
-        api_response = api_instance.get_transactions_by_month(plan_id, month, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get plan month transactions
+        api_response = api_instance.get_transactions_by_month(plan_id, month, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions_by_month:\n")
         pprint(api_response)
     except Exception as e:
@@ -584,6 +591,7 @@ Name | Type | Description  | Notes
  **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **month** | **str**| The plan month in ISO format (e.g. 2016-12-01) (\&quot;current\&quot; can also be used to specify the current calendar month (UTC)) | 
  **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
+ **until_date** | **date**| If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
@@ -610,9 +618,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_transactions_by_payee**
-> HybridTransactionsResponse get_transactions_by_payee(plan_id, payee_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+> HybridTransactionsResponse get_transactions_by_payee(plan_id, payee_id, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
 
-Get all payee transactions
+Get payee transactions
 
 Returns all transactions for a specified payee, excluding any pending transactions
 
@@ -648,13 +656,14 @@ with ynab.ApiClient(configuration) as api_client:
     api_instance = ynab.TransactionsApi(api_client)
     plan_id = 'plan_id_example' # str | The id of the plan. \"last-used\" can be used to specify the last used plan and \"default\" can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan).
     payee_id = 'payee_id_example' # str | The id of the payee
-    since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
+    since_date = '2013-10-20' # date | If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified. (optional)
+    until_date = '2013-10-20' # date | If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). (optional)
     type = 'type_example' # str | If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported. (optional)
     last_knowledge_of_server = 56 # int | The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included. (optional)
 
     try:
-        # Get all payee transactions
-        api_response = api_instance.get_transactions_by_payee(plan_id, payee_id, since_date=since_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
+        # Get payee transactions
+        api_response = api_instance.get_transactions_by_payee(plan_id, payee_id, since_date=since_date, until_date=until_date, type=type, last_knowledge_of_server=last_knowledge_of_server)
         print("The response of TransactionsApi->get_transactions_by_payee:\n")
         pprint(api_response)
     except Exception as e:
@@ -670,7 +679,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **plan_id** | **str**| The id of the plan. \&quot;last-used\&quot; can be used to specify the last used plan and \&quot;default\&quot; can be used if default plan selection is enabled (see: https://api.ynab.com/#oauth-default-plan). | 
  **payee_id** | **str**| The id of the payee | 
- **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
+ **since_date** | **date**| If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). Defaults to one year ago when not specified. | [optional] 
+ **until_date** | **date**| If specified, only transactions on or before this date will be included.  The date should be ISO formatted (e.g. 2016-12-30). | [optional] 
  **type** | **str**| If specified, only transactions of the specified type will be included. \&quot;uncategorized\&quot; and \&quot;unapproved\&quot; are currently supported. | [optional] 
  **last_knowledge_of_server** | **int**| The starting server knowledge.  If provided, only entities that have changed since &#x60;last_knowledge_of_server&#x60; will be included. | [optional] 
 
