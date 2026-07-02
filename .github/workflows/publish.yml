@@ -13,6 +13,10 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # required for PyPI Trusted Publishing (OIDC)
+      contents: write  # create the GitHub Release
+      pull-requests: write  # comment on PRs included in the release
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
@@ -45,9 +49,7 @@ jobs:
           git commit -m 'Bumping version for ${{ steps.bump_version.outputs.new_version }}'
           git push
       - name: Publish to PyPI
-        env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.POETRY_PYPI_TOKEN_PYPI }}
-        run: poetry publish      
+        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b  # v1.14.0
       - name: Create a Release
         id: create-release
         uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda  # v3.0.0
