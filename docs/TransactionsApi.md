@@ -947,7 +947,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**209** | The transactions were successfully updated |  -  |
+**200** | The transactions were successfully updated |  -  |
 **400** | The request could not be understood due to malformed syntax or validation error(s). |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
