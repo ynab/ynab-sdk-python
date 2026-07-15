@@ -1,6 +1,8 @@
 import json
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
+import ynab
+from ynab.api.transactions_api import TransactionsApi
 from ynab.api_client import ApiClient
 from ynab.rest import RESTResponse
 
@@ -35,3 +37,40 @@ def test_deserialize_user_response():
 
     assert result.status_code == 200
     assert str(result.data.data.user.id) == "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+
+
+def test_update_transactions_with_http_info_deserializes_real_200_response():
+    """Regression test: TransactionsApi.update_transactions must map status
+    200, not 209, in its own generated _response_types_map.
+
+    The spec previously declared updateTransactions' success response as
+    HTTP 209, but the real API returns 200. Since 200 didn't match the
+    hardcoded map inside update_transactions/_with_http_info/
+    _without_preload_content, every real, successful call silently
+    deserialized to data=None -- callers had no way to tell the request
+    had in fact succeeded. This calls the real generated method (not a
+    hand-supplied response_types_map) so it actually exercises the fixed
+    value embedded in transactions_api.py.
+    """
+    client = ApiClient()
+    rest_resp = make_rest_response(200, {
+        "data": {
+            "transaction_ids": ["aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"],
+            "transactions": [],
+            "duplicate_import_ids": [],
+            "server_knowledge": 1,
+        }
+    })
+
+    with patch.object(ApiClient, "call_api", return_value=rest_resp):
+        api = TransactionsApi(client)
+        result = api.update_transactions_with_http_info(
+            plan_id="last-used",
+            data=ynab.PatchTransactionsWrapper(transactions=[]),
+        )
+
+    assert result.status_code == 200
+    assert result.data is not None
+    assert result.data.data.transaction_ids == [
+        "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    ]

@@ -1189,7 +1189,7 @@ paths:
               $ref: "#/components/schemas/PatchTransactionsWrapper"
         required: true
       responses:
-        "209":
+        "200":
           description: The transactions were successfully updated
           content:
             application/json:

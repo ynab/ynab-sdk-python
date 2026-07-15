@@ -3344,7 +3344,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '209': "SaveTransactionsResponse",
+            '200': "SaveTransactionsResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -3416,7 +3416,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '209': "SaveTransactionsResponse",
+            '200': "SaveTransactionsResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -3488,7 +3488,7 @@ class TransactionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '209': "SaveTransactionsResponse",
+            '200': "SaveTransactionsResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
