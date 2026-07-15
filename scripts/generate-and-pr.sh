@@ -3,9 +3,10 @@
 # Regenerate the SDK from the latest YNAB API spec, then optionally open a PR.
 #
 # Wraps scripts/generate.sh. After regenerating it detects the old -> new spec
-# version and, if you confirm, ensures you're on a gen-<version> branch and
-# hands the commit + PR off to `claude`, which writes a real summary of the
-# functional spec changes. Requires the `claude` CLI to be installed.
+# version and, if you confirm, ensures you're on a gen-<version> branch, then
+# commits, pushes, and opens a PR via git/gh. The `claude` CLI is used only to
+# draft the PR description from the spec diff. Requires the `gh` and `claude`
+# CLIs to be installed and authenticated.
 
 set -euo pipefail
 
@@ -63,32 +64,48 @@ case "$BRANCH" in
     fi
     echo "On protected branch '$BRANCH'; creating and switching to '$target'."
     git switch -c "$target"
+    BRANCH="$target"
     ;;
   *)
     echo "Committing on current branch: '$BRANCH'."
     ;;
 esac
 
+# Commit and push the regenerated client.
+git add -A
+git commit \
+  -m "Regenerate SDK from server specification version ${NEW_VERSION}" \
+  -m "Regenerated the client from the YNAB API spec ${NEW_VERSION} (previously ${OLD_VERSION:-unknown})."
+git push -u origin "$BRANCH"
+
+# Use claude only to draft the PR description from the meaningful diff (the spec
+# and docs; the per-file churn under ynab/ is noise). Everything else is gh/git.
 echo
-echo "Handing off to Claude to write the commit + PR (this may take a minute)..."
-echo
+echo "Drafting the PR description with Claude..."
+DIFF="$(git diff "origin/main...HEAD" -- open_api_spec.yaml docs/; echo; git diff --stat "origin/main...HEAD")"
 
-# Scope the spawned Claude to only the tools the commit/PR flow needs so the
-# non-interactive run doesn't stall on approval prompts, without granting a
-# blanket permission bypass.
-ALLOWED_TOOLS="Bash Read Edit Write Grep Glob Skill TodoWrite"
+BODY_FILE="$(mktemp)"
+trap 'rm -f "$BODY_FILE"' EXIT
 
-PROMPT="The working tree contains a regeneration of this SDK from the YNAB OpenAPI spec, version ${OLD_VERSION:-unknown} -> ${NEW_VERSION:-unknown} (produced by scripts/generate.sh).
+claude -p "Write a GitHub pull request description for a regeneration of the YNAB Python SDK from the YNAB OpenAPI spec (version ${OLD_VERSION:-unknown} -> ${NEW_VERSION}).
 
-Do the following, and nothing else:
-1. Inspect the diff, focusing on open_api_spec.yaml and docs/ for FUNCTIONAL API changes (new or changed fields, endpoints, enums, response codes). Ignore the mechanical per-file header/version churn under ynab/.
-2. Commit ALL changes. The subject should note the spec regeneration and version bump (${OLD_VERSION:-unknown} -> ${NEW_VERSION:-unknown}); the body should summarize the functional changes (or state it is a routine refresh if there are none).
-3. Push and open a PR against main with a clear title and description. Do NOT request any reviewers.
-4. Print the PR URL on the final line.
+Summarize the FUNCTIONAL API changes (new or changed fields, endpoints, enums, response codes) from the diff below, focusing on open_api_spec.yaml and docs/. If there are no functional changes, say it is a routine spec-generation refresh. Ignore the mechanical per-file header/version churn under ynab/.
 
-Do not modify any generated code — only commit and open the PR."
+Output ONLY the PR description as Markdown — no preamble and no surrounding code fence. Do not use any tools.
 
-claude -p "$PROMPT" --allowedTools $ALLOWED_TOOLS
+Diff:
+${DIFF}" > "$BODY_FILE"
+
+if [[ ! -s "$BODY_FILE" ]]; then
+  echo "Regenerated the client from the YNAB API spec ${NEW_VERSION} (previously ${OLD_VERSION:-unknown})." > "$BODY_FILE"
+fi
+
+# Open the PR (no reviewers). gh prints the PR URL.
+gh pr create \
+  --base main \
+  --head "$BRANCH" \
+  --title "Regenerate SDK from server specification version ${NEW_VERSION}" \
+  --body-file "$BODY_FILE"
 
 echo
 echo "Done."
