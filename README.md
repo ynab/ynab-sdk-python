@@ -11,7 +11,7 @@ This client is generated using the [OpenAPI Generator](https://openapi-generator
 
 ## Requirements
 
-Python 3.8+
+Python 3.10+
 
 ## Installation
 
