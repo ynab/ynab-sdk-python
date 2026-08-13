@@ -1,8 +1,8 @@
 # See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
 
 # Paths that Dependabot PRs can touch
-/pyproject.toml @ynab/full-stack
-/poetry.lock @ynab/full-stack
-/requirements.txt @ynab/full-stack
-/test-requirements.txt @ynab/full-stack
-/.github/ @ynab/full-stack
+/pyproject.toml @bradymholt
+/poetry.lock @bradymholt
+/requirements.txt @bradymholt
+/test-requirements.txt @bradymholt
+/.github/ @bradymholt
