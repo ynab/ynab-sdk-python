@@ -2,13 +2,24 @@
 #
 # Regenerate the SDK from the latest YNAB API spec, then optionally open a PR.
 #
+# Usage: scripts/generate-and-pr.sh [major|minor|patch]   (defaults to minor)
+#
 # Wraps scripts/generate.sh. After regenerating it detects the old -> new spec
-# version and, if you confirm, ensures you're on a gen-<version> branch, then
-# commits, pushes, and opens a PR via git/gh. The `claude` CLI is used only to
-# draft the PR description from the spec diff. Requires the `gh` and `claude`
-# CLIs to be installed and authenticated.
+# version and, if you confirm, bumps the package version, ensures you're on a
+# gen-<version> branch, then commits, pushes, and opens a PR via git/gh. The
+# `claude` CLI is used only to draft the PR description from the spec diff.
+# Requires the `gh` and `claude` CLIs to be installed and authenticated.
 
 set -euo pipefail
+
+VERSION_TYPE="${1:-minor}"
+case "$VERSION_TYPE" in
+  major | minor | patch) ;;
+  *)
+    echo "Invalid version type: $VERSION_TYPE (expected major, minor, or patch)" >&2
+    exit 1
+    ;;
+esac
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 SCRIPT_DIR="$REPO_ROOT/scripts"
@@ -24,8 +35,9 @@ spec_version() {
 
 OLD_VERSION="$(git show HEAD:open_api_spec.yaml 2>/dev/null | spec_version || true)"
 
-# Regenerate: downloads the latest spec and runs openapi-generator.
-bash "$SCRIPT_DIR/generate.sh"
+# Regenerate without bumping the version, so an unchanged spec leaves the working
+# tree clean and the no-op check below still holds.
+bash "$SCRIPT_DIR/generate.sh" none
 
 NEW_VERSION="$(spec_version < "$SPEC")"
 
@@ -48,6 +60,14 @@ case "$reply" in
     exit 0
     ;;
 esac
+
+# The published version comes from pyproject.toml on main, so the release bump
+# rides along in this PR.  The generator embeds it, hence the second pass.
+echo
+echo "Bumping package version (${VERSION_TYPE}) and regenerating..."
+PACKAGE_VERSION="$(python3 "$SCRIPT_DIR/update_version.py" "$VERSION_TYPE")"
+bash "$SCRIPT_DIR/generate.sh" none
+echo "Package version: ${PACKAGE_VERSION}"
 
 # Never commit on a protected branch: if we're on one, create a fresh
 # gen-<version> branch (the uncommitted regen changes carry over). Otherwise
@@ -75,7 +95,7 @@ esac
 git add -A
 git commit \
   -m "Regenerate SDK from server specification version ${NEW_VERSION}" \
-  -m "Regenerated the client from the YNAB API spec ${NEW_VERSION} (previously ${OLD_VERSION:-unknown})."
+  -m "Regenerated the client from the YNAB API spec ${NEW_VERSION} (previously ${OLD_VERSION:-unknown}) and set the package version to ${PACKAGE_VERSION}."
 git push -u origin "$BRANCH"
 
 # Use claude only to draft the PR description from the meaningful diff (the spec
