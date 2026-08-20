@@ -1,60 +1,47 @@
 name: Publish
 on:
   workflow_dispatch:
-    inputs:
-      version_type:
-        type: choice
-        description: Version type
-        default: minor
-        options:
-        - major
-        - minor
-        - patch
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       id-token: write  # required for PyPI Trusted Publishing (OIDC)
-      contents: write  # create the GitHub Release
+      contents: write  # create the tag and GitHub Release
       pull-requests: write  # comment on PRs included in the release
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
-        with:
-          token: ${{ secrets.GH_API_TOKEN }}
-      - name: Setup git repo        
-        run: |
-          git config user.name $GITHUB_ACTOR
-          git config user.email gh-actions-${GITHUB_ACTOR}@github.com          
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
         with:
           python-version: 3.12
+      - name: Resolve version to publish
+        id: version
+        run: |
+          version=$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["version"])')
+          echo "version=${version}" >> $GITHUB_OUTPUT
+      - name: Verify the release tag does not already exist
+        env:
+          TAG_NAME: ${{ steps.version.outputs.version }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/${TAG_NAME}" >/dev/null 2>&1; then
+            echo "::error::Tag ${TAG_NAME} already exists.  Bump the version in pyproject.toml first."
+            exit 1
+          fi
       - name: Install dependencies
         run: |
           pip install poetry
           poetry install
-      - name: Bump Version
-        id: bump_version 
-        run: |
-          NEW_VERSION=$(python scripts/update_version.py ${{ github.event.inputs.version_type }})
-          echo "NEW_VERSION=$NEW_VERSION"
-          echo "new_version=$(echo $NEW_VERSION)" >> $GITHUB_OUTPUT                   
-      - name: Generate with new version
-        run: ./scripts/generate.sh
+      - name: Test with pytest
+        run: poetry run pytest
       - name: Build
         run: poetry build
-      - name: Commit and push changes
-        run: |
-          git add ynab/configuration.py ynab/api_client.py ynab/__init__.py pyproject.toml openapi-generator-config.yaml
-          git commit -m 'Bumping version for ${{ steps.bump_version.outputs.new_version }}'
-          git push
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33  # v1.14.2
       - name: Create a Release
         id: create-release
         uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228  # v3.0.2
         with:
-          tag_name: ${{ steps.bump_version.outputs.new_version }}
+          tag_name: ${{ steps.version.outputs.version }}
           generate_release_notes: true
       - name: Comment on PRs with link to release they are included in
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3  # v9.0.0
