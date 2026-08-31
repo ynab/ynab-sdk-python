@@ -6,10 +6,15 @@ on:
 
 jobs:
   socket-basics-security-scan:
-    # We intentionally run this shared action from @main, not from a pinned sha
-    # this is because we control the shared-actions repo, so there is not a significant risk of malicious changes being pushed.
-    # Plus, the shared action does use pinned dependencies, and so will be updated fairly often.  When we do that, we do not
-    # want to have to update the sha in every repo that uses this shared action, before such updates apply.
-    uses: ynab/shared-actions/.github/workflows/socket-basics.yml@main
+    # TESTING ONLY — both refs below point at unmerged branches, to canary the
+    # ynab-sast-scanner migration before it reaches main. Before this merges, and before
+    # this repo is actually migrated, these become:
+    #   uses: ynab/ynab-sast-scanner/.github/workflows/socket-basics.yml@main
+    # and the `with:` block goes away entirely, so suppressions come from the
+    # suppressions repo's default branch.
+    uses: ynab/ynab-sast-scanner/.github/workflows/socket-basics.yml@add-sast-scanner-infrastructure
+    with:
+      suppressions-ref: add-sast-scanner-infrastructure
     secrets:
       SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_SECURITY_API_KEY }}
+      SAST_SUPPRESSIONS_APP_PRIVATE_KEY: ${{ secrets.SAST_SUPPRESSIONS_APP_PRIVATE_KEY }}
