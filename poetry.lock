@@ -754,14 +754,14 @@ windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
 name = "pyproject-api"
-version = "1.11.0"
+version = "1.11.1"
 description = "API to interact with the python pyproject.toml based projects"
 optional = false
 python-versions = ">=3.10"
 groups = ["dev"]
 files = [
-    {file = "pyproject_api-1.11.0-py3-none-any.whl", hash = "sha256:860060c8832dce983b5eec6f41c4c43eb3ec06ff7332387a63acdf5ca27b68d8"},
-    {file = "pyproject_api-1.11.0.tar.gz", hash = "sha256:b8807d85a293e6c9f133e6575946fed45f1d42b22d58c780b33aa2421a799549"},
+    {file = "pyproject_api-1.11.1-py3-none-any.whl", hash = "sha256:b82a5724361b89282432c5ea2251e477278235138df1c6f12ad464ebde87e208"},
+    {file = "pyproject_api-1.11.1.tar.gz", hash = "sha256:999ba9741fca3519a3876482cd2eddbce250c31c42c031506c5ea5610f1d3589"},
 ]
 
 [package.dependencies]
