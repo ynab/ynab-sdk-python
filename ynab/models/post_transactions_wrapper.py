@@ -91,10 +91,10 @@ class PostTransactionsWrapper(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "transaction": NewTransaction.from_dict(obj["transaction"]) if obj.get("transaction") is not None else None,
             "transactions": [NewTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

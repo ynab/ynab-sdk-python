@@ -85,13 +85,13 @@ class PayeeLocation(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "payee_id": obj.get("payee_id"),
             "latitude": obj.get("latitude"),
             "longitude": obj.get("longitude"),
             "deleted": obj.get("deleted")
-        })
+        }.items() if k in obj})
         return _obj
 
 

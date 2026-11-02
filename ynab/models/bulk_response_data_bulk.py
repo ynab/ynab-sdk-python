@@ -81,10 +81,10 @@ class BulkResponseDataBulk(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "transaction_ids": obj.get("transaction_ids"),
             "duplicate_import_ids": obj.get("duplicate_import_ids")
-        })
+        }.items() if k in obj})
         return _obj
 
 

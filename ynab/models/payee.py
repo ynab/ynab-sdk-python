@@ -89,12 +89,12 @@ class Payee(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "name": obj.get("name"),
             "transfer_account_id": obj.get("transfer_account_id"),
             "deleted": obj.get("deleted")
-        })
+        }.items() if k in obj})
         return _obj
 
 

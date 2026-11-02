@@ -94,13 +94,13 @@ class SaveTransactionsResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "transaction_ids": obj.get("transaction_ids"),
             "transaction": TransactionDetail.from_dict(obj["transaction"]) if obj.get("transaction") is not None else None,
             "transactions": [TransactionDetail.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
             "duplicate_import_ids": obj.get("duplicate_import_ids"),
             "server_knowledge": obj.get("server_knowledge")
-        })
+        }.items() if k in obj})
         return _obj
 
 

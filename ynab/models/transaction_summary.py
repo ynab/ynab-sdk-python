@@ -174,7 +174,7 @@ class TransactionSummary(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "date": obj.get("date"),
             "amount": obj.get("amount"),
@@ -196,7 +196,7 @@ class TransactionSummary(BaseModel):
             "deleted": obj.get("deleted"),
             "amount_formatted": obj.get("amount_formatted"),
             "amount_currency": obj.get("amount_currency")
-        })
+        }.items() if k in obj})
         return _obj
 
 

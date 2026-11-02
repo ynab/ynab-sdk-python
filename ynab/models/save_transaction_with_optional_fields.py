@@ -127,7 +127,7 @@ class SaveTransactionWithOptionalFields(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "account_id": obj.get("account_id"),
             "date": obj.get("date"),
             "amount": obj.get("amount"),
@@ -139,7 +139,7 @@ class SaveTransactionWithOptionalFields(BaseModel):
             "approved": obj.get("approved"),
             "flag_color": obj.get("flag_color"),
             "subtransactions": [SaveSubTransaction.from_dict(_item) for _item in obj["subtransactions"]] if obj.get("subtransactions") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

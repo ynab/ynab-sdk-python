@@ -123,7 +123,7 @@ class NewCategory(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "name": obj.get("name"),
             "note": obj.get("note"),
             "category_group_id": obj.get("category_group_id"),
@@ -131,7 +131,7 @@ class NewCategory(BaseModel):
             "goal_target_date": obj.get("goal_target_date"),
             "goal_needs_whole_amount": obj.get("goal_needs_whole_amount"),
             "goal_frequency": obj.get("goal_frequency")
-        })
+        }.items() if k in obj})
         return _obj
 
 

@@ -114,7 +114,7 @@ class PlanSummary(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "name": obj.get("name"),
             "last_modified_on": obj.get("last_modified_on"),
@@ -123,7 +123,7 @@ class PlanSummary(BaseModel):
             "date_format": DateFormat.from_dict(obj["date_format"]) if obj.get("date_format") is not None else None,
             "currency_format": CurrencyFormat.from_dict(obj["currency_format"]) if obj.get("currency_format") is not None else None,
             "accounts": [Account.from_dict(_item) for _item in obj["accounts"]] if obj.get("accounts") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

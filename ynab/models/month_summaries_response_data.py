@@ -88,10 +88,10 @@ class MonthSummariesResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "months": [MonthSummary.from_dict(_item) for _item in obj["months"]] if obj.get("months") is not None else None,
             "server_knowledge": obj.get("server_knowledge")
-        })
+        }.items() if k in obj})
         return _obj
 
 

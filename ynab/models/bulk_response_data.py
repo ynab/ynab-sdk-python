@@ -84,9 +84,9 @@ class BulkResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "bulk": BulkResponseDataBulk.from_dict(obj["bulk"]) if obj.get("bulk") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

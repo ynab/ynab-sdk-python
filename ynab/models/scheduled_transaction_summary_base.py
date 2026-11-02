@@ -132,7 +132,7 @@ class ScheduledTransactionSummaryBase(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "date_first": obj.get("date_first"),
             "date_next": obj.get("date_next"),
@@ -146,7 +146,7 @@ class ScheduledTransactionSummaryBase(BaseModel):
             "category_id": obj.get("category_id"),
             "transfer_account_id": obj.get("transfer_account_id"),
             "deleted": obj.get("deleted")
-        })
+        }.items() if k in obj})
         return _obj
 
 

@@ -91,10 +91,10 @@ class PlanSummaryResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "plans": [PlanSummary.from_dict(_item) for _item in obj["plans"]] if obj.get("plans") is not None else None,
             "default_plan": PlanSummary.from_dict(obj["default_plan"]) if obj.get("default_plan") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

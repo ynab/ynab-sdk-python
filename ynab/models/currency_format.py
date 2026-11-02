@@ -87,7 +87,7 @@ class CurrencyFormat(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "iso_code": obj.get("iso_code"),
             "example_format": obj.get("example_format"),
             "decimal_digits": obj.get("decimal_digits"),
@@ -96,7 +96,7 @@ class CurrencyFormat(BaseModel):
             "group_separator": obj.get("group_separator"),
             "currency_symbol": obj.get("currency_symbol"),
             "display_symbol": obj.get("display_symbol")
-        })
+        }.items() if k in obj})
         return _obj
 
 

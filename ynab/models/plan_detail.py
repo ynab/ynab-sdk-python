@@ -186,7 +186,7 @@ class PlanDetail(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "name": obj.get("name"),
             "last_modified_on": obj.get("last_modified_on"),
@@ -204,7 +204,7 @@ class PlanDetail(BaseModel):
             "subtransactions": [SubTransactionBase.from_dict(_item) for _item in obj["subtransactions"]] if obj.get("subtransactions") is not None else None,
             "scheduled_transactions": [ScheduledTransactionSummaryBase.from_dict(_item) for _item in obj["scheduled_transactions"]] if obj.get("scheduled_transactions") is not None else None,
             "scheduled_subtransactions": [ScheduledSubTransactionBase.from_dict(_item) for _item in obj["scheduled_subtransactions"]] if obj.get("scheduled_subtransactions") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

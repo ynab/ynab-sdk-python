@@ -88,10 +88,10 @@ class ScheduledTransactionsResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "scheduled_transactions": [ScheduledTransactionDetail.from_dict(_item) for _item in obj["scheduled_transactions"]] if obj.get("scheduled_transactions") is not None else None,
             "server_knowledge": obj.get("server_knowledge")
-        })
+        }.items() if k in obj})
         return _obj
 
 

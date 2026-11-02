@@ -196,7 +196,7 @@ class HybridTransaction(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "date": obj.get("date"),
             "amount": obj.get("amount"),
@@ -223,7 +223,7 @@ class HybridTransaction(BaseModel):
             "account_name": obj.get("account_name"),
             "payee_name": obj.get("payee_name"),
             "category_name": obj.get("category_name")
-        })
+        }.items() if k in obj})
         return _obj
 
 

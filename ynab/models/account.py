@@ -141,7 +141,7 @@ class Account(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "name": obj.get("name"),
             "type": obj.get("type"),
@@ -166,7 +166,7 @@ class Account(BaseModel):
             "cleared_balance_currency": obj.get("cleared_balance_currency"),
             "uncleared_balance_formatted": obj.get("uncleared_balance_formatted"),
             "uncleared_balance_currency": obj.get("uncleared_balance_currency")
-        })
+        }.items() if k in obj})
         return _obj
 
 

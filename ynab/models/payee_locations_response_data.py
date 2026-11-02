@@ -87,9 +87,9 @@ class PayeeLocationsResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "payee_locations": [PayeeLocation.from_dict(_item) for _item in obj["payee_locations"]] if obj.get("payee_locations") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

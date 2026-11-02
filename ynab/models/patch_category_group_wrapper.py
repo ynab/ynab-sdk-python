@@ -84,9 +84,9 @@ class PatchCategoryGroupWrapper(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "category_group": SaveCategoryGroup.from_dict(obj["category_group"]) if obj.get("category_group") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

@@ -118,7 +118,7 @@ class SaveScheduledTransaction(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "account_id": obj.get("account_id"),
             "date": obj.get("date"),
             "amount": obj.get("amount"),
@@ -128,7 +128,7 @@ class SaveScheduledTransaction(BaseModel):
             "memo": obj.get("memo"),
             "flag_color": obj.get("flag_color"),
             "frequency": obj.get("frequency")
-        })
+        }.items() if k in obj})
         return _obj
 
 

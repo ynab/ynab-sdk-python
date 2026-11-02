@@ -106,13 +106,13 @@ class SaveSubTransaction(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "amount": obj.get("amount"),
             "payee_id": obj.get("payee_id"),
             "payee_name": obj.get("payee_name"),
             "category_id": obj.get("category_id"),
             "memo": obj.get("memo")
-        })
+        }.items() if k in obj})
         return _obj
 
 

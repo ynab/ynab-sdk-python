@@ -84,9 +84,9 @@ class PostAccountWrapper(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "account": SaveAccount.from_dict(obj["account"]) if obj.get("account") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

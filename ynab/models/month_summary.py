@@ -106,7 +106,7 @@ class MonthSummary(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "month": obj.get("month"),
             "note": obj.get("note"),
             "income": obj.get("income"),
@@ -123,7 +123,7 @@ class MonthSummary(BaseModel):
             "activity_currency": obj.get("activity_currency"),
             "to_be_budgeted_formatted": obj.get("to_be_budgeted_formatted"),
             "to_be_budgeted_currency": obj.get("to_be_budgeted_currency")
-        })
+        }.items() if k in obj})
         return _obj
 
 

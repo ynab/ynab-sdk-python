@@ -93,14 +93,14 @@ class CategoryGroupWithCategories(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "name": obj.get("name"),
             "hidden": obj.get("hidden"),
             "internal": obj.get("internal"),
             "deleted": obj.get("deleted"),
             "categories": [Category.from_dict(_item) for _item in obj["categories"]] if obj.get("categories") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

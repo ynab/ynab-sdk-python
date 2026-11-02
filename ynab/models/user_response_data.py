@@ -84,9 +84,9 @@ class UserResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "user": User.from_dict(obj["user"]) if obj.get("user") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

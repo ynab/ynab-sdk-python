@@ -84,9 +84,9 @@ class PlanSettingsResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "settings": PlanSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

@@ -99,10 +99,10 @@ class PlanSettings(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "date_format": DateFormat.from_dict(obj["date_format"]) if obj.get("date_format") is not None else None,
             "currency_format": CurrencyFormat.from_dict(obj["currency_format"]) if obj.get("currency_format") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

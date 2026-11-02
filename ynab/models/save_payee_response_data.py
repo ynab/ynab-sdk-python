@@ -85,10 +85,10 @@ class SavePayeeResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "payee": Payee.from_dict(obj["payee"]) if obj.get("payee") is not None else None,
             "server_knowledge": obj.get("server_knowledge")
-        })
+        }.items() if k in obj})
         return _obj
 
 

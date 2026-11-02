@@ -84,9 +84,9 @@ class PutTransactionWrapper(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "transaction": ExistingTransaction.from_dict(obj["transaction"]) if obj.get("transaction") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 

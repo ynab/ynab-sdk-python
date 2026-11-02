@@ -88,10 +88,10 @@ class HybridTransactionsResponseData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "transactions": [HybridTransaction.from_dict(_item) for _item in obj["transactions"]] if obj.get("transactions") is not None else None,
             "server_knowledge": obj.get("server_knowledge")
-        })
+        }.items() if k in obj})
         return _obj
 
 

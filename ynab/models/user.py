@@ -81,9 +81,9 @@ class User(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id")
-        })
+        }.items() if k in obj})
         return _obj
 
 

@@ -127,7 +127,7 @@ class MoneyMovement(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "month": obj.get("month"),
             "moved_at": obj.get("moved_at"),
@@ -139,7 +139,7 @@ class MoneyMovement(BaseModel):
             "amount": obj.get("amount"),
             "amount_formatted": obj.get("amount_formatted"),
             "amount_currency": obj.get("amount_currency")
-        })
+        }.items() if k in obj})
         return _obj
 
 

@@ -96,13 +96,13 @@ class MoneyMovementGroup(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "group_created_at": obj.get("group_created_at"),
             "month": obj.get("month"),
             "note": obj.get("note"),
             "performed_by_user_id": obj.get("performed_by_user_id")
-        })
+        }.items() if k in obj})
         return _obj
 
 

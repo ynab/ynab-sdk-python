@@ -195,7 +195,7 @@ class TransactionDetail(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
+        _obj = cls.model_validate({k: v for k, v in {
             "id": obj.get("id"),
             "date": obj.get("date"),
             "amount": obj.get("amount"),
@@ -221,7 +221,7 @@ class TransactionDetail(BaseModel):
             "payee_name": obj.get("payee_name"),
             "category_name": obj.get("category_name"),
             "subtransactions": [SubTransaction.from_dict(_item) for _item in obj["subtransactions"]] if obj.get("subtransactions") is not None else None
-        })
+        }.items() if k in obj})
         return _obj
 
 
