@@ -5,7 +5,7 @@ info:
     Our API uses a REST based design, leverages the JSON data format, and relies upon HTTPS for transport. We respond with meaningful HTTP response codes and if an error occurs, we include error details in the response body.
 
     Read the [API Documentation](https://api.ynab.com) for more information about the API, including how to obtain an access token and how to use it to make requests.
-  version: 1.86.0
+  version: 1.88.0
 servers:
   - url: https://api.ynab.com/v1
 security:
@@ -1231,14 +1231,12 @@ paths:
       tags:
         - Transactions
       summary: Import transactions
-      description: Imports available transactions on all linked accounts for the given
-        plan.  Linked accounts allow transactions to be imported directly from a
-        specified financial institution and this endpoint initiates that
-        import.  Sending a request to this endpoint is the equivalent of
-        clicking "Import" on each account in the web application or tapping the
-        "New Transactions" banner in the mobile applications.  The response for
-        this endpoint contains the transaction ids that have been imported.
+      description: "DEPRECATED: This endpoint is no longer needed because YNAB now
+        automatically imports transactions on linked accounts.  Requests are
+        still accepted for backwards compatibility but no import is performed
+        and the response will always contain an empty list of transaction ids."
       operationId: importTransactions
+      deprecated: true
       parameters:
         - name: plan_id
           in: path
@@ -1250,13 +1248,7 @@ paths:
             type: string
       responses:
         "200":
-          description: The request was successful but there were no transactions to import
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TransactionsImportResponse"
-        "201":
-          description: One or more transactions were imported successfully
+          description: The request was successful.  No transactions are imported.
           content:
             application/json:
               schema:
@@ -2905,7 +2897,9 @@ components:
           type: array
           description: An array of subtransactions to configure a transaction as a split.
             Updating `subtransactions` on an existing split transaction is not
-            supported.
+            supported and will return an error.  Splits are not allowed on
+            tracking accounts or on transfers between on-budget accounts; a
+            transfer to a tracking account can be a split.
           items:
             $ref: "#/components/schemas/SaveSubTransaction"
     SaveSubTransaction:
@@ -3269,20 +3263,23 @@ components:
           description: The goal target amount in milliunits format.  If value is specified
             and goal has not already been configured for category, a monthly goal
             will be created for the category with this target amount.  If goal_type is
-            not specified, it will default to 'NEED' or 'MF' for Credit Card Payment categories.
+            not specified, it will default to 'NEED', or to 'MF' for Credit Card Payment categories and
+            'DEBT' for categories paired to a loan account.
             When updating a category, passing null removes any existing target.
           format: int64
         goal_target_date:
           type:
             - string
             - "null"
-          description: The goal target date in ISO format (e.g. 2016-12-01).
+          description: The goal target date in ISO format (e.g. 2016-12-01). Not supported for categories
+            paired to a loan account.
           format: date
         goal_needs_whole_amount:
           type:
             - boolean
             - "null"
-          description: Whether the goal requires the full target amount each period. Only supported for 'NEED' goals.
+          description: Whether the goal requires the full target amount each period. Only supported for 'NEED' goals,
+            and not supported for Credit Card Payment categories or categories paired to a loan account.
             When true, the goal is configured as 'Set aside another...'.
             When false, the goal is configured as 'Refill up to...'.
         goal_frequency:
@@ -3293,7 +3290,8 @@ components:
             - yearly
           description: When specified, configures a recurring 'NEED' target of goal_target that repeats at this
             frequency, replacing any existing target. Requires goal_target. Cannot be combined with goal_target_date
-            and is not supported for Credit Card Payment categories. Omit to leave an existing target's cadence unchanged.
+            and is not supported for Credit Card Payment categories or categories paired to a loan account.
+            Omit to leave an existing target's cadence unchanged.
     ExistingCategory:
       allOf:
         - $ref: "#/components/schemas/SaveCategory"
